@@ -1,3 +1,4 @@
+
 // Nullish Coalescing
 
 function printMessage1(text) {
@@ -69,7 +70,9 @@ displayPerson2(person);
 displayPerson3(person);
 displayPerson4(person);
 
+
 // Spread Syntax
+
 const item = { tpye: 'cloths' };
 const detail = { size: '100', price: 20 };
 
@@ -88,6 +91,7 @@ fruits2 = ['투명']
 console.log(fruits.concat(fruits2));
 fruits = [...fruits, ...fruits2];
 console.log(fruits)
+
 
 // Optional Chaining
 
@@ -110,7 +114,40 @@ const displayJobTitle1 = (person) => {
   }
 }
 const displayJobTitle2 = (person) => {
-  if(person.job?.job) {
+  if(person.job?.title) {
     console.log(person.job.title);
   }
 }
+
+const displayJobTitle3 = (person) => {
+  const title = person.job?.title ?? 'No Job Yet';
+  console.log(title)
+}
+
+displayJobTitle1(bob);
+displayJobTitle2(bob);
+displayJobTitle3(bob);
+displayJobTitle1(anna);
+displayJobTitle2(anna);
+displayJobTitle3(anna);
+
+
+// Template Literals
+
+let raehan = 'raehan';
+console.log('hello ' + raehan);
+console.log(`hello ${raehan}`);
+
+
+// 배열 중 짝수를 찾아 4를 곱한 후 다 더하기
+let items = [1, 2, 3, 4, 5, 6];
+
+let sum = items.filter(item => item%2===0).map(item => item*4).reduce((a, b) => a+b, 0);
+console.log(sum);
+
+
+const array = ['개', '냥', '말', '꿀', '꿀', '개'];
+console.log(array);
+
+console.log(new Set(array))
+console.log([...new Set(array)]);
