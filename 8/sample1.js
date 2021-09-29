@@ -6,3 +6,4 @@
 
 console.log(typeof String(Infinity));
 console.log(typeof Infinity.toString());
+
