@@ -72,3 +72,6 @@ Link: [Google][googlelink]
 [Google](https://naver.com, "naver redirect")
 [Google](https://naver.com , "naver redirect")
 [Google](https://naver.com "naver redirect")
+
+Outer Link: <www.google.com>
+E-mail Link: <raehan900809@gmail.com>
