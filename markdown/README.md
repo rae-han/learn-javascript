@@ -77,7 +77,15 @@ Outer Link: <www.google.com>
 E-mail Link: <raehan900809@gmail.com>
 
 *single asterisks*
+
 _single underline_
+
 **double asterisks**
+
 __single underline__
+
 ~~cancel line~~
+
+문장 중간에는 **띄어쓰는** 것이 좋다
+문장 중간에는 **띄어쓰는**것이 좋다
+
