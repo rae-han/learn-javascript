@@ -64,3 +64,7 @@ console.log(123);
 
 Link: [Google][googlelink]
 [googlelink]: https://google.com "Go google"
+
+Link: [Google][googlelink]
+
+[googlelink]: https://google.com "Go google"
