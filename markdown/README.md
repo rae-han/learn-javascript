@@ -70,3 +70,4 @@ Link: [Google][googlelink]
 [googlelink]: https://google.com "Go google"
 
 [Google](https://naver.com, "naver redirect")
+[Google](https://naver.com "naver redirect")
