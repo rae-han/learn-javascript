@@ -45,6 +45,7 @@ this is an H2
     
 코드블록
 
-
-
-    
+```javascript
+console.log(123);
+  console.log(456);
+```
