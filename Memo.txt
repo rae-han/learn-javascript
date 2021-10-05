@@ -2,7 +2,17 @@
 하지만 훌륭한 프로그래머는 사람이 이해할 수 있는 코드를 쓴다.
 - 마틴 파울러(Margin Fowler) - 리팩토링 의 저자
 
-대표님 안녕하세요.
-다음 프로젝트때 적용하고 싶은 기술에 관련된 듣고 싶은 강의가 있는데 들어도 될까요??
-자바스크립트 기본 규약 변경 점과 웹컴포넌트 만드는걸 도와주는 React, 그리고 웹페이지를 접근 가능하게 해주는 NodeJS 관련된 내용인데 지금 공식 홈페이지 격인 mdn보고 하려니 아직 자료도 업데이트 다 안됐고 제가 영어를 잘 못해서 조금 더뎌서요ㅠㅠ
-금액은 142,200₩ 입니다ㅠ
+Committer: 정래한 <raehan@jeonglaehan-ui-MacBookAir.local>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 1 deletion(-)
