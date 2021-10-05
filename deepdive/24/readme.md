@@ -1,8 +1,8 @@
-# 클로저   
+# **클로저**
 
 ## 클로저의 정의
 
-> 클로저는 함수와 그 함수가 선언된 렉시컬 환경과의 조합이다.   
+> 클로저는 **함수와 그 함수가 선언된 렉시컬 환경과의 조합**이다.   
 A closure is the combination of a function and the lexical environment within which that function was declared.
 > 
 - example code
@@ -24,10 +24,10 @@ A closure is the combination of a function and the lexical environment within wh
     outerFunc1();
     
     // ex2
-    const y = 1;
+    const y = 2;
     
     function outerFunc2 () {
-      const y = 10;
+      const y = 20;
       innerFunc2();
     }
     
@@ -36,16 +36,17 @@ A closure is the combination of a function and the lexical environment within wh
     }
     
     outerFunc2();
+    innerFunc2();
     
     // ex3
-    const z = 1;
+    const z = 3;
     
     const innerFunc3 = () => {
       console.log(z); // 1
     }
     
     const outerFunc3 = () => {
-      const z = 10;
+      const z = 30;
       innerFunc3();
     
     outerFunc3(); 
