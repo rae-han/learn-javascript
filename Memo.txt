@@ -15,18 +15,3 @@ After doing this, you may fix the identity used for this commit with:
 
     git commit --amend --reset-author
 
-<<<<<<< HEAD
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-
-
-
-
-
- On branch master
-Your branch and 'origin/master' have diverged,
-and have 1 and 1 different commits each, respectively.
-  (use "git pull" to merge the remote branch into yours)
-=======
- 1 file changed, 2 insertions(+), 1 deletion(-)
->>>>>>> d2daa454d3f9e787641791684e1b91e88eb343f2
