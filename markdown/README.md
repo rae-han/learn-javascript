@@ -95,3 +95,5 @@ __single underline__
 ![text](https://github.com/rae-han/learn-javascript/blob/master/markdown/images/frontend_frameworks.jpeg)
 ![text](https://github.com/rae-han/learn-javascript/blob/master/markdown/images/frontend_frameworks.jpeg "Optional title")
 
+<img src="https://github.com/rae-han/learn-javascript/blob/master/markdown/images/frontend_frameworks.jpeg" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="RubberDuck"></img><br/>
+<img src="https://github.com/rae-han/learn-javascript/blob/master/markdown/images/frontend_frameworks.jpeg" width="40%" height="30%" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
