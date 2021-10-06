@@ -4,6 +4,22 @@
 // function outerFunc1() {
 //   const x = 10;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //   function innerFunc1() { 
 //     console.log(x); 
 //   }

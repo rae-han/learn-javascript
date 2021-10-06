@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <p>전역 변수를 사용한 Counting</p>
+  <button id="inclease">+</button>
+  <p id="count">0</p>
+  <script>
+    let incleaseBtn = document.getElementById('inclease');
+    let count = document.getElementById('count');
+
+    // 카운트 상태를 유지하기 위한 전역 변수
+    let counter = 0;
+
+    function increase() {
+      return ++counter;
+    }
+
+    incleaseBtn.onclick = function () {
+      count.innerHTML = increase();
+    };
+  </script>
+</body>
+</html>
