@@ -290,23 +290,79 @@ console.log(decreaser()); // -2
 참고로 makeCounter를 호출해 반환된 클로저 함수는 자신만의 독립된 렉시컬 환경을 갖는다. 이는 함수를 호출할 때마다 새로운 렉시컬 환경이 생성된다는 뜻이고 위 예제에서 increaser와 decreaser에 할당된 함수는 각각 독립된 렉시컬 환경을 갖고 카운트를 유지하기 위한 자유 변수 counter를 공유하지 않고 연동되지도 않는다.
 독립된 카운터가 아니라 연동하여 증감이 가능한 카운터를 만들려면 렉시컬 환경을 공유하는 클로저를 만들어야한다.
 
+```jsx
+const counter = (function () {
+  let counter = 0;
+
+  return function (predicate) {
+    counter = predicate(counter);
+
+    return counter
+  };
+}());
+
+function increase(n) {
+  return ++n;
+}
+
+function decrease(n) {
+  return --n;
+}
+
+console.log(counter(increase)); // 1
+console.log(counter(increase)); // 2
+console.log(counter(decrease)); // 1
+console.log(counter(decrease)); // 0
+```
+
+- 모듈 패턴
+
+```jsx
+const counter = (function() {
+  let _counter = 0;
+
+  function changeBy(val) {
+    _counter += val;
+  }
+
+  return {
+    value: () => {
+      return _counter;
+    },
+    increment: () => {
+      changeBy(1);
+    },
+    decrement: () => {
+      changeBy(-1);
+    }
+  }
+})();
+
+console.log(counter.value()); // 0
+counter.increment();
+counter.increment();
+console.log(counter.value()); // 2
+counter.decrement();
+console.log(counter.value()); // 1
+```
+
 ### 2.3 정보의 은닉
 
 ```jsx
 function Counter() {
   // 카운트를 유지하기 위한 자유 변수
-  let counter = 0;
+  let _counter = 0;
   // this.counter = 0;
 
   // 클로저
   this.increase = function () {
-    return ++counter;
+    return ++_counter;
     // return ++this.counter;
   };
 
   // 클로저
   this.decrease = function () {
-    return --counter;
+    return --_counter;
     // return --this.counter;
   };
 }
@@ -321,6 +377,22 @@ console.dir(counter)
 생성자 함수 Counter는 increase, decrease 메소드를 갖는 인스턴스를 생성한다.  이 메소드들은 모두 자신이 생성됐을 때의 렉시컬 환경인 생성자 함수 Counter의 스코프에 속한 변수 counter를 기억하는 클로저이며 렉시컬 환경을 공유한다. 생성자 함수가 생성한 객체의 메소드는 객체의 프로퍼티에만 접근할 수 있는 것이 아니며 자신이 기억하는 렉시컬 환경의 변수에도 접근할 수 있다.
 
 이때 변수 counter는 this에 바인딩된 프로퍼티가 아니라 변수다. counter가 this에 바인딩된 프로퍼티라면 생성자 함수 Counter가 생성한 인스턴스를 통해 외부에서 접근이 가능한 public 프로퍼티가 되지만 외부에서 접근할 수 없다. Counter가 생성한 인스턴스 메소드인 increase, decrease는 클로저이기 때문에 자신이 생성됐을 때의 렉시컬 환경인 생성자 함수 Counter의 변수 counter에 접근할 수 있다. 이런 클로저의 특징을 사용해 클래스 기반 언어의 private 키워드를 흉내낼 수 있다.
+
+```jsx
+class Counter {
+  #count = 0;
+
+  getCount() {
+    console.log(this.#count)
+    return this.#count;
+  }
+}
+
+let counter = new Counter();
+
+console.log(counter)
+counter.getCount();
+```
 
 ## 3. 자주 발생하는 실수
 
