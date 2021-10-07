@@ -5,7 +5,6 @@ const person = (function() {
   };
 
   function changeBy(edit) {
-    console.log(edit)
     _value = { ..._value, ...edit }
   }
 
@@ -14,15 +13,23 @@ const person = (function() {
       return _value;
     },
     setName: (name) => {
+      // 2
       changeBy(name);
     },
     setAge: (age) => {
+      // 2
       changeBy(age);
     }
   }
 })();
 
-console.log(person.value())
+console.log(person.value()) // 1 { name: '이름', age: 30 }
 person.setName({ name: '새 이름' });
-person.setAge({ age: 32 });
-console.log(person.value())
+console.log(person.value()) // 3 { name: '새 이름', age: 32 }
+console.log(person) 
+// 4
+// {
+//   value: [Function: value],
+//   setName: [Function: setName],
+//   setAge: [Function: setAge]
+// }
