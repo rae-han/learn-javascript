@@ -324,6 +324,8 @@ console.dir(counter)
 
 ## 3. 자주 발생하는 실수
 
+- 의도되지 않은 동작
+
 ```jsx
 var arr = [];
 
@@ -341,6 +343,8 @@ for (var j = 0; j < arr.length; j++) {
 ```
 
 var는 function scope이기 때문에 for문에서 var를 사용하면 전역변수로 선언된다.
+
+- 해결법 1
 
 ```jsx
 var arr = [];
@@ -360,6 +364,8 @@ for (var j = 0; j < arr.length; j++) {
 
 클로저를 사용하여 전달인자(idx)로 i 값을 주면 배열에 각 함수가 할당될 때 그 때의 i 값을 매개변수로 받기 때문에 지역변수를 사용한 것 같은 효과가 난다.
 
+- 해결법 2
+
 ```jsx
 const arr = [];
 
@@ -375,6 +381,8 @@ for (let i = 0; i < arr.length; i++) {
 ```
 
 var 가 function scope 이여서 일어나는 문제기 때문에 block scope 인 let, const 를 사용하면 된다.
+
+- 해결법 3
 
 ```jsx
 const arr = new Array(5).fill();
