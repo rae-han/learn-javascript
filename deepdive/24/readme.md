@@ -80,7 +80,7 @@ inner(); // 10
 
 즉 외부함수가 이미 반환되었어도 외부함수 내의 변수는 이를 필요로 하는 내부함수가 하나 이상 존재하는 경우 계속 유지된다. 이때 내부함수가 외부함수에 있는 변수의 복사본이 아니라 실제 변수에 접근한다는 것에 주의하여야 한다.
 
-![closure.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0a4e1aee-fa1b-4bf5-a60d-b7c583aeb1c2/closure.png)
+![closure.png](https://github.com/rae-han/learn-javascript/blob/master/deepdive/24/images/closure.png)
 
 # 2. 클로저의 활용
 
