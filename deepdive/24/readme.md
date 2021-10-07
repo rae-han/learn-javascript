@@ -290,4 +290,100 @@ console.log(decreaser()); // -2
 참고로 makeCounter를 호출해 반환된 클로저 함수는 자신만의 독립된 렉시컬 환경을 갖는다. 이는 함수를 호출할 때마다 새로운 렉시컬 환경이 생성된다는 뜻이고 위 예제에서 increaser와 decreaser에 할당된 함수는 각각 독립된 렉시컬 환경을 갖고 카운트를 유지하기 위한 자유 변수 counter를 공유하지 않고 연동되지도 않는다.
 독립된 카운터가 아니라 연동하여 증감이 가능한 카운터를 만들려면 렉시컬 환경을 공유하는 클로저를 만들어야한다.
 
-### 정보의 은닉
+### 2.3 정보의 은닉
+
+```jsx
+function Counter() {
+  // 카운트를 유지하기 위한 자유 변수
+  let counter = 0;
+  // this.counter = 0;
+
+  // 클로저
+  this.increase = function () {
+    return ++counter;
+    // return ++this.counter;
+  };
+
+  // 클로저
+  this.decrease = function () {
+    return --counter;
+    // return --this.counter;
+  };
+}
+
+const counter = new Counter();
+
+console.log(counter.increase()); // 1
+console.log(counter.decrease()); // 0
+console.dir(counter)
+```
+
+생성자 함수 Counter는 increase, decrease 메소드를 갖는 인스턴스를 생성한다.  이 메소드들은 모두 자신이 생성됐을 때의 렉시컬 환경인 생성자 함수 Counter의 스코프에 속한 변수 counter를 기억하는 클로저이며 렉시컬 환경을 공유한다. 생성자 함수가 생성한 객체의 메소드는 객체의 프로퍼티에만 접근할 수 있는 것이 아니며 자신이 기억하는 렉시컬 환경의 변수에도 접근할 수 있다.
+
+이때 변수 counter는 this에 바인딩된 프로퍼티가 아니라 변수다. counter가 this에 바인딩된 프로퍼티라면 생성자 함수 Counter가 생성한 인스턴스를 통해 외부에서 접근이 가능한 public 프로퍼티가 되지만 외부에서 접근할 수 없다. Counter가 생성한 인스턴스 메소드인 increase, decrease는 클로저이기 때문에 자신이 생성됐을 때의 렉시컬 환경인 생성자 함수 Counter의 변수 counter에 접근할 수 있다. 이런 클로저의 특징을 사용해 클래스 기반 언어의 private 키워드를 흉내낼 수 있다.
+
+## 3. 자주 발생하는 실수
+
+```jsx
+var arr = [];
+
+for (var i = 0; i < 5; i++) {
+  arr[i] = function () {
+    return i;
+  };
+}
+
+console.log(`i: ${i}`) // 5
+
+for (var j = 0; j < arr.length; j++) {
+  console.log(arr[j]());
+}
+```
+
+var는 function scope이기 때문에 for문에서 var를 사용하면 전역변수로 선언된다.
+
+```jsx
+var arr = [];
+
+for (var i = 0; i < 5; i++){
+  arr[i] = (function (idx) { // 2
+    return function () {
+      return idx; // 3
+    };
+  }(i)); // 1
+}
+
+for (var j = 0; j < arr.length; j++) {
+  console.log(arr[j]());
+}
+```
+
+클로저를 사용하여 전달인자(idx)로 i 값을 주면 배열에 각 함수가 할당될 때 그 때의 i 값을 매개변수로 받기 때문에 지역변수를 사용한 것 같은 효과가 난다.
+
+```jsx
+const arr = [];
+
+for (let i = 0; i < 5; i++) {
+  arr[i] = function () {
+    return i;
+  };
+}
+
+for (let i = 0; i < arr.length; i++) {
+  console.log(arr[i]());
+}
+```
+
+var 가 function scope 이여서 일어나는 문제기 때문에 block scope 인 let, const 를 사용하면 된다.
+
+```jsx
+const arr = new Array(5).fill();
+
+arr.forEach((v, i, array) => array[i] = () => i);
+
+arr.forEach(f => console.log(f()));
+
+arr.map(a => a);
+```
+
+고차 함수를 사용한다. 변수와 반복문의 사용을 억제해 에플리케이션의 오류를 줄이고 가독성을 좋게 만든다.
