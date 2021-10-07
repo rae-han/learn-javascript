@@ -153,8 +153,6 @@ But 클로저는 자바스크립트의 강력한 기능으로 이를 적극적�
 
 ### 2.2 전역 변수 사용 억제
 
-1. 
-
 ```html
 <!DOCTYPE html>
 <html>
@@ -183,8 +181,6 @@ But 클로저는 자바스크립트의 강력한 기능으로 이를 적극적�
 
 잘 동작하지만 변수에 아무나 접근 가능한 좋지 않은 코드다.
 
-1. 
-
 ```html
 <!DOCTYPE html>
 <html>
@@ -211,8 +207,6 @@ But 클로저는 자바스크립트의 강력한 기능으로 이를 적극적�
 ```
 
 지역변수는 라이프사이클이 끝나면 실행컨텍스트에서 소멸하므로 변경된 이전 상태를 기억하지 못한다.
-
-1. 
 
 ```html
 <!DOCTYPE html>
@@ -401,3 +395,11 @@ arr.map(a => a);
 ```
 
 고차 함수를 사용한다. 변수와 반복문의 사용을 억제해 에플리케이션의 오류를 줄이고 가독성을 좋게 만든다.
+
+- 참조
+    
+    [http://dmitrysoshnikov.com/ecmascript/chapter-6-closures/](http://dmitrysoshnikov.com/ecmascript/chapter-6-closures/)
+    
+    [https://poiemaweb.com/js-closure](https://poiemaweb.com/js-closure)
+    
+    [https://developer.mozilla.org/ko/docs/Web/JavaScript/Closures](https://developer.mozilla.org/ko/docs/Web/JavaScript/Closures)
