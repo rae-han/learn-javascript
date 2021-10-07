@@ -1,6 +1,4 @@
-# **클로저**
-
-## 1. 클로저 개념
+# 1. 클로저 정의
 
 > 클로저는 **함수와 그 함수가 선언된 렉시컬 환경과의 조합**이다.   
 A closure is the combination of a function and the lexical environment within which that function was declared.
@@ -14,13 +12,13 @@ function outerFunc1() {
   const x = 10;
 
   function innerFunc1() {
-    console.log(x); // 10
+    console.log(x);
   }
 
   innerFunc1();
 }
 
-outerFunc1();
+outerFunc1(); // 10
 
 // ex2
 const y = 2;
@@ -31,51 +29,22 @@ function outerFunc2 () {
 }
 
 function innerFunc2() {
-  console.log(y); // 2
+  console.log(y);
 }
 
-outerFunc2();
-innerFunc2();
-
-// ex3
-const z = 3;
-
-const innerFunc3 = () => {
-  console.log(z); // 3
-}
-
-const outerFunc3 = () => {
-  const z = 30;
-  innerFunc3();
-}
-
-outerFunc3();
+outerFunc2(); // 2
+innerFunc2(); // 2
 ```
 
-```jsx
-let x = 1;
+예제 1에서 함수 outer 내에서 내부함수 inner가 선언되고 호출됐다. 이때 내부함수 inner는 자신을 포함하고 있는 외부함수outer의 변수 x에 접근할 수 있다. 이는 함수 inner가 함수 outer의 내부에 선언되었기 때문이다.
 
-function outerFunc1() {
-  let x = 10;
+### 참고. 렉시컬 스코프
 
-  function innerFunc1() { 
-    console.log(x); 
-  }
-
-  innerFunc1();
-}
-
-outerFunc1(); // 10
-```
-
-함수 outer 내에서 내부함수 inner가 선언되고 호출됐다. 이때 내부함수 inner는 자신을 포함하고 있는 외부함수outer의 변수 x에 접근할 수 있다. 이는 함수 inner가 함수 outer의 내부에 선언되었기 때문이다.
-
-### 렉시컬 스코프
-
-> 자바스크립트 엔진은 함수를 어디서 호출했는지가 아니라 **함수를 어디에 정의했는지에 따라 상위 스코프를 결정**한다. 이를 렉시컬 스코프(정적 스코프)라 한다.
-> 
+자바스크립트 엔진은 함수를 어디서 호출했는지가 아니라 **함수를 어디에 정의했는지에 따라 상위 스코프를 결정**한다. 이를 렉시컬 스코프(정적 스코프)라 한다.
 
 실행 컨텍스트의 관점에서 내부함수 inner가 호출되면 자신의 실행 컨텍스트가 실행 컨텍스트 스택에 쌓이고 변수 객체, 스코프 체인, this에 바인딩할 객체가 결정된다. 이때 스코프 체인은 전역 스코프를 가리키는 전역 객체와 함수 outer의 스코프를 가리키는 함수 outer의 활성 객체 그리고 함수 자신의 스코프를 가리키는 활성 객체를 순차적으로 바인딩한다. 스코프 체인이 바인딩한 객체가 바로 렉시컬 스코프의 실체이다.
+
+### 예시.
 
 ```jsx
 function outerFunc() {
@@ -95,16 +64,17 @@ inner(); // 10
 
 이처럼 자신을 포함하고 있는 외부함수보다 내부함수가 더 오래 유지되는 경우, 외부 함수 밖에서 내부함수가 호출되더라도 외부함수의 지역 변수에 접근할 수 있는데 이러한 함수를 클로저(Closure)라고 부른다.
 
-클로저는 함수와 그 함수가 선언됐을 때의 렉시컬 환경(Lexical environment)과의 조합이다.
+### 1.1 클로저의 구성
 
-- 함수: 반환된 내부 함수
-- 그 함수가 선언될 때의 렉시컬 환경: 내부 함수가 선언됐을 때의 스코프
+- 클로저는 함수와 그 함수가 선언됐을 때의 렉시컬 환경(Lexical environment)과의 조합이다.
+1. 함수: 반환된 내부 함수
+2. 그 함수가 선언될 때의 렉시컬 환경: 내부 함수가 선언됐을 때의 스코프
 
-즉, 클로저는 바환된 내부함수가 자신이 선언됐을 때의 환경인 스코프를 기억하여 자신이 선언됐을 때의 환경 밖에서 호출되어도 그 환경에 접글할 수 있는 함수
+### 1.2 정리.
 
+- 즉, 클로저는 바환된 내부함수가 자신이 선언됐을 때의 환경인 스코프를 기억하여 자신이 선언됐을 때의 환경 밖에서 호출되어도 그 환경에 접글할 수 있는 함수
 → 자신이 생성될 때의 환경을 기억하는 함수
-
-클로저에 의해 참조되는 외부함수의 변수(outer 함수의 변수 x)를 자유변수(Free variable)라 부른다. 클로저라는 이름은 자유변수에 함수가 닫혀있다(closed)라는 의미로 자유변수에 엮여있는 함수라는 뜻이다.
+- 클로저에 의해 참조되는 외부함수의 변수(outer 함수의 변수 x)를 자유변수(Free variable)라 부른다. 클로저라는 이름은 자유변수에 함수가 닫혀있다(closed)라는 의미로 자유변수에 엮여있는 함수라는 뜻이다.
 
 실행 컨텍스트의 관점에서는, 내부함수가 유효한 상태에서 외부함수가 종료하여 외부함수의 실행 컨텍스트가 반환되어도, 외부함수 실행 컨텍스트 내의 활성 객체(Activation object)(변수, 함수 선언 등의 정보를 가지고 있다)는 내부함수에 의해 참조되는 한 유효하여 내부함수가 스코프 체인을 통해 참조할 수 있는 것을 의미한다.
 
@@ -112,13 +82,13 @@ inner(); // 10
 
 ![closure.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0a4e1aee-fa1b-4bf5-a60d-b7c583aeb1c2/closure.png)
 
-## 2. 클로저의 활용
+# 2. 클로저의 활용
 
 클로저는 자신이 생성될 때의 환경을 기억해야 하므로 메모리 차원에서 손해를 볼 수 있다. 
 
 But 클로저는 자바스크립트의 강력한 기능으로 이를 적극적으로 사용해야 한다.
 
-### 2.1 상태 유지
+## 2.1 상태 유지
 
 클로저가 가장 유용하게 사용되는 상황은 **현재 상태를 기억하고 변경된 최신 상태를 유지**하는 것이다.
 
@@ -151,7 +121,9 @@ But 클로저는 자바스크립트의 강력한 기능으로 이를 적극적�
 </html>
 ```
 
-### 2.2 전역 변수 사용 억제
+## 2.2 전역 변수 사용 억제
+
+### 2.2.1 전역 변수
 
 ```html
 <!DOCTYPE html>
@@ -181,6 +153,8 @@ But 클로저는 자바스크립트의 강력한 기능으로 이를 적극적�
 
 잘 동작하지만 변수에 아무나 접근 가능한 좋지 않은 코드다.
 
+### 2.2.2 지역 변수
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -207,6 +181,8 @@ But 클로저는 자바스크립트의 강력한 기능으로 이를 적극적�
 ```
 
 지역변수는 라이프사이클이 끝나면 실행컨텍스트에서 소멸하므로 변경된 이전 상태를 기억하지 못한다.
+
+### 2.2.3 클로저 사
 
 ```html
 <!DOCTYPE html>
@@ -246,7 +222,7 @@ But 클로저는 자바스크립트의 강력한 기능으로 이를 적극적�
 상태 변경이나 가변 데이터를 피하고 불변성을 지향하는 함수형 프로그래밍에서 부수 효과를 최대한 억제하여 오류를 피하고 프로그램의 안정성을 높이기 위해 클로저는 적극적으로 사용된다.
 > 
 
-- 함수형 프로그래밍에서 클로저를 활용하는 예제
+### 2.2.4 함수형 프로그래밍에서 클로저를 활용하는 예제
 
 ```jsx
 // 함수를 인자로 전달받고 함수를 반환하는 고차 함수
@@ -315,7 +291,7 @@ console.log(counter(decrease)); // 1
 console.log(counter(decrease)); // 0
 ```
 
-- 모듈 패턴
+### 2.2.5 모듈 패턴
 
 ```jsx
 const counter = (function() {
@@ -346,7 +322,7 @@ counter.decrement();
 console.log(counter.value()); // 1
 ```
 
-### 2.3 정보의 은닉
+## 2.3 정보의 은닉
 
 ```jsx
 function Counter() {
@@ -394,9 +370,9 @@ console.log(counter)
 counter.getCount();
 ```
 
-## 3. 자주 발생하는 실수
+# 3. 자주 발생하는 실수
 
-- 의도되지 않은 동작
+### 의도되지 않은 동작
 
 ```jsx
 var arr = [];
@@ -416,7 +392,7 @@ for (var j = 0; j < arr.length; j++) {
 
 var는 function scope이기 때문에 for문에서 var를 사용하면 전역변수로 선언된다.
 
-- 해결법 1
+### 해결법 1
 
 ```jsx
 var arr = [];
@@ -436,7 +412,7 @@ for (var j = 0; j < arr.length; j++) {
 
 클로저를 사용하여 전달인자(idx)로 i 값을 주면 배열에 각 함수가 할당될 때 그 때의 i 값을 매개변수로 받기 때문에 지역변수를 사용한 것 같은 효과가 난다.
 
-- 해결법 2
+### 해결법 2
 
 ```jsx
 const arr = [];
@@ -454,7 +430,7 @@ for (let i = 0; i < arr.length; i++) {
 
 var 가 function scope 이여서 일어나는 문제기 때문에 block scope 인 let, const 를 사용하면 된다.
 
-- 해결법 3
+### 해결법 3
 
 ```jsx
 const arr = new Array(5).fill();
@@ -468,10 +444,10 @@ arr.map(a => a);
 
 고차 함수를 사용한다. 변수와 반복문의 사용을 억제해 에플리케이션의 오류를 줄이고 가독성을 좋게 만든다.
 
-- 참조
-    
-    [http://dmitrysoshnikov.com/ecmascript/chapter-6-closures/](http://dmitrysoshnikov.com/ecmascript/chapter-6-closures/)
-    
-    [https://poiemaweb.com/js-closure](https://poiemaweb.com/js-closure)
-    
-    [https://developer.mozilla.org/ko/docs/Web/JavaScript/Closures](https://developer.mozilla.org/ko/docs/Web/JavaScript/Closures)
+## 참조
+
+[http://dmitrysoshnikov.com/ecmascript/chapter-6-closures/](http://dmitrysoshnikov.com/ecmascript/chapter-6-closures/)
+
+[https://poiemaweb.com/js-closure](https://poiemaweb.com/js-closure)
+
+[https://developer.mozilla.org/ko/docs/Web/JavaScript/Closures](https://developer.mozilla.org/ko/docs/Web/JavaScript/Closures)
