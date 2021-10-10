@@ -14,7 +14,7 @@ const person = (function() {
     },
     setName: (name) => {
       // 2
-      changeBy(name);
+      changeBy({ name });
     },
     setAge: (age) => {
       // 2
@@ -24,12 +24,13 @@ const person = (function() {
 })();
 
 console.log(person.value()) // 1 { name: '이름', age: 30 }
-person.setName({ name: '새 이름' });
-console.log(person.value()) // 3 { name: '새 이름', age: 32 }
+// person.setName({ name: '새 이름' });
+person.setName('새 이름');
+console.log(person.value()) // 3 { name: '새 이름', age: 30 }
 console.log(person) 
 // 4
 // {
 //   value: [Function: value],
 //   setName: [Function: setName],
 //   setAge: [Function: setAge]
-// }
+// }+
