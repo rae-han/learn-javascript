@@ -70,6 +70,48 @@ console.log(man3.__proto__.constructor.__proto__ === Function.prototype);
 console.dir(man3.__proto__.constructor.__proto__.__proto__)
 console.log(man3.__proto__.constructor.__proto__.__proto__ === Object.prototype)
 
+// q
+// console.log(man3.__proto__ === Object.prototype);   // ① true
+// console.log(Object.prototype.constructor === Object); // ② true
+// console.log(Object.__proto__ === Function.prototype); // ③ true
+// console.log(Function.prototype.__proto__ === Object.prototype); // ④ true
+
+
+console.log(`######## ######## ${6} ######## ######## ######## ########`)
+console.log(`######## ######## 생성자 함수로 생성된 객체의 프로토타입 체인`)
+
+function Person4({ name, gender }) {
+  this.name = name;
+  this.gender = gender;
+  this.sayHello = function(){
+    console.log(`Hi! my name is ${this.name}`);
+  }
+}
+
+let man4 = new Person4({
+  name: 'Han',
+  gender: 'male'
+});
+
+console.dir(Person4);
+console.dir(man4);
+
+console.log(man4);
+console.dir(man4.__proto__);
+console.log(man4.__proto__);
+console.log(man4.__proto__ === Person4.prototype);
+console.dir(man4.__proto__.constructor)
+console.log(man4.__proto__.constructor === Person4.prototype.constructor);
+console.dir(man4.__proto__.constructor.__proto__)
+console.log(man4.__proto__.constructor.__proto__ === Function.prototype)
+console.dir(man4.__proto__.constructor.__proto__.__proto__)
+console.log(man4.__proto__.constructor.__proto__.__proto__ === Object.prototype)
+
+console.log(man4.__proto__ === Person4.prototype);                // ① true
+console.log(Person4.prototype.__proto__ === Object.prototype);   // ② true
+console.log(Person4.prototype.constructor === Person4);           // ③ true
+console.log(Person4.__proto__ === Function.prototype);           // ④ true
+console.log(Function.prototype.__proto__ === Object.prototype); // ⑤ true
 
 
 
