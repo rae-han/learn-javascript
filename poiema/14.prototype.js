@@ -42,8 +42,35 @@ function Person2(name) {
 
 let man2 = new Person2('Han');
 
-console.log(Person2.prototype.constructor === Person2) // true
-console.log(man2.constructor === Person2) // 
+console.dir(Person2);
+console.dir(man2)
+console.log(Person2.prototype);
+console.dir(Person2.prototype);
+console.log(man2.prototype);
+console.log(man2.__proto__ === Person2.prototype);
+
+console.log(`######## ######## ${5} ######## ######## ######## ########`)
+console.log(`######## ######## 객체 리터럴 방식으로 생성된 객체의 프로토타입 체인`)
+
+let man3 = {
+  name: 'Han',
+  gender: 'male',
+  sayHello() {
+    console.log(`Hi! my name is ${this.name}`)
+  }
+};
+
+console.dir(man3);
+console.log(man3);
+console.dir(man3.__proto__)
+console.log(man3.__proto__ === Object.prototype);
+console.dir(man3.__proto__.constructor)
+console.log(man3.__proto__.constructor.__proto__)
+console.log(man3.__proto__.constructor.__proto__ === Function.prototype);
+console.dir(man3.__proto__.constructor.__proto__.__proto__)
+console.log(man3.__proto__.constructor.__proto__.__proto__ === Object.prototype)
+
+
 
 
 
