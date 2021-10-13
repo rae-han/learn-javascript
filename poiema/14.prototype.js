@@ -107,12 +107,14 @@ console.log(man4.__proto__.constructor.__proto__ === Function.prototype)
 console.dir(man4.__proto__.constructor.__proto__.__proto__)
 console.log(man4.__proto__.constructor.__proto__.__proto__ === Object.prototype)
 
-console.log(man4.__proto__ === Person4.prototype);                // ① true
-console.log(Person4.prototype.__proto__ === Object.prototype);   // ② true
-console.log(Person4.prototype.constructor === Person4);           // ③ true
-console.log(Person4.__proto__ === Function.prototype);           // ④ true
-console.log(Function.prototype.__proto__ === Object.prototype); // ⑤ true
+// console.log(man4.__proto__ === ); 
+// console.log(Person4.prototype.__proto__ === ); 
+// console.log(Person4.prototype.constructor === ); 
+// console.log(Person4.__proto__ === ); 
+// console.log(Function.prototype.__proto__ === ); 
 
-
-
-
+console.log(man4.__proto__ === Person4.prototype); 
+console.log(Person4.prototype.__proto__ === Object.prototype); 
+console.log(Person4.prototype.constructor === Person4); 
+console.log(Person4.__proto__ === Function.prototype); 
+console.log(Function.prototype.__proto__ === Object.prototype); 
