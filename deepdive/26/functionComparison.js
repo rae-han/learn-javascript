@@ -55,3 +55,4 @@ console.log(methodFunc())
 // // v4: 
 // // v14: 
 
+// 생성자 함수 화살표 함수 constructor prototype super arguments
