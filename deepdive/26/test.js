@@ -1,6 +1,7 @@
-let obj = {
-  number: 1,
-  getNumber() {
-    return this.number;
+var obj = {
+  func() {
+    return 1;
   }
-};
+}
+
+new obj.func();
