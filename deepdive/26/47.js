@@ -4,10 +4,13 @@ class Base {
   }
 
   sayHi() {
-    return `Hi ${this.name}`;
+    return `Hi! ${this.name}`;
   }
 }
 
 class Derived extends Base {
-  sayHi = () => `${super.sayHi()} how are you doing?`;s
+  sayHi = () => `${super.sayHi()} how are you doing?}`;
 }
+
+const derived = new Derived('Raehan');
+console.log(derived.sayHi()); // Hi! Raehan How are you doing?
