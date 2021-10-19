@@ -6,10 +6,11 @@ class Base {
   sayHi() {
     return `Hi! ${this.name}`;
   }
+  sayHi = () => `Hi. ${this.name}`;
 }
 
 class Derived extends Base {
-  sayHi = () => `${super.sayHi()} how are you doing?}`;
+  sayHi = () => `${super.sayHi()} how are you doing?`;
 }
 
 const derived = new Derived('Raehan');
