@@ -43,11 +43,11 @@
 
 
 
+const arrowFunc = (...args) => {
+  console.log(args); // [ 1, 2, 3, 4, 5 ]
+  console.log(arguments); 
+  // [Arguments] { ...
+  // Uncaught ReferenceError: arguments is not defined
+} 
 
-
-
-
-
-
-
-console.log(arguments)
+arrowFunc(1, 2, 3, 4, 5)
