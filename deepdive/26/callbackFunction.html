@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Callback Function Test</title>
+</head>
+<body>
+  <button id="NormalFunc">0</button>
+  <button id="ArrowFunc">0</button>
+
+  <script>
+  let normalFuncBtn = document.querySelector('#NormalFunc');
+  let normalFuncCount = 0;
+  let arrowFuncBtn = document.querySelector('#ArrowFunc');
+  let arrowFuncCount = 0;
+
+  normalFuncBtn.addEventListener('click', function() {
+    this.innerHTML = ++normalFuncCount;
+  });
+  arrowFuncBtn.addEventListener('click', () => {
+    this.innerHTML = ++arrowFuncCount;
+    console.log(this);
+  })
+  </script>
+</body>
+</html>
