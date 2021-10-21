@@ -31,7 +31,7 @@ let printMessage = (func) => {
   func('Hello');
   func(undefined);
   func(null);
-  func(0)
+  func(0);
   func('')
 };
 
