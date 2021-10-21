@@ -1,7 +1,54 @@
-var obj = {
-  func() {
-    return 1;
-  }
-}
+// class Person {
+//   constructor(name) {
+//     this.name = name;
+//     this.sayHi = () => console.log(`Hi ${this.name}`); // 인스턴스 메서드
+//   }
 
-new obj.func();
+//   sayHello() { console.log(`Hello ${this.name}`); }; // 프로토타입 메서드
+// }
+
+// let man = new Person('m');
+// let women = new Person('w');
+
+// man.sayHi(); // Hi m
+// man.sayHello(); // Hello m
+
+// console.log(man.sayHi === women.sayHi); // false
+// console.log(man.sayHello === women.sayHello); // true
+
+
+
+
+
+
+
+
+// class Person {
+//   constructor(name) {
+//     this.name = name;
+//   }
+
+//   sayHi = () => console.log(`Hi ${this.name}`); // 인스턴스 메서드
+//   sayHello() { console.log(`Hello ${this.name}`); }; // 프로토타입 메서드
+// }
+
+// let man = new Person('m');
+// let women = new Person('w');
+
+// man.sayHi(); // Hi m
+// man.sayHello(); // Hello m
+
+// console.log(man.sayHi === women.sayHi); // false
+// console.log(man.sayHello === women.sayHello); // true
+
+
+
+// const arrowFunc = (...args) => {
+//   console.log(args); // [ 1, 2, 3, 4, 5 ]
+//   console.log(arguments); 
+//   // [Arguments] { ...
+//   // Uncaught ReferenceError: arguments is not defined
+// } 
+
+// arrowFunc(1, 2, 3, 4, 5)
+
