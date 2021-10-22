@@ -8,8 +8,7 @@ const base = {
 // const derived = {
 //   __proto__: base,
 //   sayHi() {
-//     console.dir(this);
-//     console.log(super());
+//     console.log(this.constructor)
 
 //     return `${super.sayHi()}. how are you doing?`;
 //   }
@@ -17,12 +16,12 @@ const base = {
 
 // console.log(derived.sayHi()); // Hi! Lee. how are you doing?
 
-const derived = {
-  __proto__: base,
-  sayHi: function () {
-    console.log(this.constructor)
-    // return `${super.sayHi()}. how are you doing?`; // SyntaxError: 'super' keyword unexpected here
-  }
-};
+// const derived = {
+//   __proto__: base,
+//   sayHi: function () {
+//     console.log(this.constructor)
+//     // return `${super.sayHi()}. how are you doing?`; // SyntaxError: 'super' keyword unexpected here
+//   }
+// };
 
-console.log(derived.sayHi()); // Hi! Lee. how are you doing?
+// derived.sayHi();

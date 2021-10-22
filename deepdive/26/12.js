@@ -4,4 +4,5 @@ const arrow = [
   () => console.log(2),
 ]
 
-arrow.map(func => func(1, 2));
+arrow.map(func => func(1, 2)); // 1 2 / 1 / 2
+// ????
