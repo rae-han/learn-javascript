@@ -17,5 +17,3 @@ console.log(0 in alphabet); // true
 
 
 
-
-
