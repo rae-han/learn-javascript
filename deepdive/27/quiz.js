@@ -10,3 +10,9 @@ const func = (value = '') => {
 console.log(func(1234567890))
 console.log(func(-1234567890))
 console.log(func(-123456789))
+
+function sum(a, b, c=0, d) {
+  console.log(a,b,c,d);
+}
+
+console.log(Object.getOwnPropertyDescriptors(sum));
