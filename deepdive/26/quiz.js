@@ -28,23 +28,20 @@ tree.sayHi(); // ????
 
 // # quiz 2
 
-class Person {
-  constructor(name) {
-    this.name = name;
+class Foo {
+  constructor(value) {
+    this.value = value;
   }
 
-  sayHi = () => console.log(`Hi ${this.name}`); // 인스턴스 메서드
-  sayHello() { console.log(`Hello ${this.name}`); }; // 프로토타입 메서드
+  arrowFunc = () => console.log(`value: ${this.value}`); // 인스턴스 메서드
+  methodFunc() { console.log(`value: ${this.value}`); }; // 프로토타입 메서드
 }
 
-let man = new Person('m');
-let women = new Person('w');
+let bar = new Foo('m');
+let baz = new Foo('w');
 
-man.sayHi(); // Hi m
-man.sayHello(); // Hello m
-
-console.log(man.sayHi === women.sayHi); // ????
-console.log(man.sayHello === women.sayHello); // ???? 
+console.log(bar.arrowFunc === baz.arrowFunc); // false
+console.log(bar.methodFunc === baz.methodFunc); // true 
 
 
 
