@@ -46,5 +46,52 @@ log();
 let result3 = arr.filter(v => v !== 3);
 console.log(result3);
 
+let result4 = arr.slice(1);
+let result5 = arr.slice(1, 3); // 첫번째 인수 인덱스부터 두번째 인수 인덱스 전까지.
 
+console.log(result4, result5)
 
+console.log(arr.slice(-8))
+console.log(arr.slice(-1000))
+
+let arr2 = [[1, 2], [[3, 4], [5, 6]], 7];
+let result6 = arr2.slice();
+result6[1][0][1] = 8;
+result6[2] = 9;
+console.log(result6);
+console.log(arr2);
+
+function sum() { // 화사룦 함수 x
+  const args = Array.from(arguments);
+  
+  return args.reduce((pre, cur) => pre+cur, 0);
+}
+
+console.log(sum(1, 2, 3));
+
+const sequences = (length) => Array.from({ length }, (v, i) => i);
+console.log(sequences(4));
+
+console.log(arr.includes(1));
+console.log(arr.includes(100));
+
+console.log([1].indexOf(1));
+console.log([1].includes(1));
+console.log([NaN].indexOf(NaN));
+console.log([NaN].includes(NaN));
+
+const sArr = ['apple', 'banana', 'orange', 'melon', 'Lemon', 'peach', 'tomato', 1, 2, 12];
+
+console.log(sArr.sort());
+console.log(sArr.reverse());
+
+const todos = [
+  { id: 4, content: 'JavaScript' },
+  { id: 1, content: 'HTML' },
+  { id: 2, content: 'CSS' }
+];
+
+todos.sort((a, b) => a.id - b.id);
+console.log(todos)
+
+console.log(arr.map(v => v**2));

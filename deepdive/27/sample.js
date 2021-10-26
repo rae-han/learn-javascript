@@ -62,6 +62,17 @@ Array.prototype.forEach.bind(arrayLike, v => console.log(v))();
 console.log('from');
 Array.from(arrayLike).forEach(v => console.log(v));
 
+const fromArray1 = Array.from({ length: 3}, (v, i) => `${i}: ${v}`);
+const fromArray2 = Array.from(new Array(3), (v, i) => `${i}: ${v}`);
+const fromArray3 = Array.from({ length: 2, 0: 'a', 1: 'b'}, v => v.toUpperCase());
+console.log(fromArray1, fromArray2, fromArray3);
+
+const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step));
+const res1 = range('A'.charCodeAt(0), 'Z'.charCodeAt(0), 1);
+console.log(res1);
+const res2 = range('A'.charCodeAt(0), 'Z'.charCodeAt(0), 1).map(x => String.fromCharCode(x));
+console.log(res2)
+
 const arr1 = [1, 2, ,4];
 console.log(arr1[1]); // 2
 console.log(arr1[2]); // undefined
@@ -69,9 +80,9 @@ console.log(arr1[2]); // undefined
 /*
 1. 사용자가 '명시적'으로 지정하는 경우
 2. Javascript 엔진이 반환하는 경우
-     2-1. 값이 할당되지 않은 변수에 접근할 때
-     2-2. 존재하지 않는 속성(property)에 접근할 때
-     2-3. 함수에 return문이 없을 때, 호출되지 않는 함수를 실행할 때
+  2-1. 값이 할당되지 않은 변수에 접근할 때
+  2-2. 존재하지 않는 속성(property)에 접근할 때
+  2-3. 함수에 return문이 없을 때, 호출되지 않는 함수를 실행할 때
 */
 
 const arr2 = [1, 2];
