@@ -22,4 +22,4 @@ const cities = {
 
 let countries = Object.entries(cities).reduce((acc, [city, country]) => ({ ...acc, [country]: [...(acc[country] || []), city] }), {});
 
-// console.log(countries);
+console.log(countries);
