@@ -35,10 +35,8 @@ const fromKeywordArray = Array.from('Hello');
 console.log(constructorFuncArray, fromKeywordArray);
 
 const arrayLike = {
-  0: 100,
-  1: 200,
-  2: 300,
   length: 3,
+  0: 100, 1: 200, 2: 300,
 };
 
 for(let i=0; i<arrayLike.length; i++) {

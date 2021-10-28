@@ -1,4 +1,4 @@
-const func = (value = '') => { 
+const func1 = (value = '') => { 
   value = '' + value
 
   return value.split('').reverse().reduce((acc, digit, idx) => {
@@ -6,10 +6,6 @@ const func = (value = '') => {
     return [...acc, digit]
   }, []).reverse().join('')
 }
-
-console.log(func(1234567890));
-console.log(func(-1234567890));
-console.log(func(-123456789));
 
 const cities = {
   London: 'UK',
@@ -20,6 +16,19 @@ const cities = {
   Munchen: 'Germany',
 };
 
-let countries = Object.entries(cities).reduce((acc, [city, country]) => ({ ...acc, [country]: [...(acc[country] || []), city] }), {});
+const func2 = (obj = '') => Object.entries(obj).reduce((acc, [row, column]) => ({ ...acc, [column]: [...(acc[column] || []), row] }), {});
 
-console.log(countries);
+// # Comma Number
+console.log(func1(1234567890)); // * 1,234,567,890
+console.log(func1(-1234567890)); // * -1,234,567,890
+console.log(func1(-123456789)); // * -123,456,789
+
+// # Flip obejct
+console.log(func2(cities));
+/*
+{
+  UK: [ 'London', 'Manchester', 'Liverpool' ],
+  France: [ 'Paris' ],
+  Germany: [ 'Berlin', 'Munchen' ]
+}
+*/
