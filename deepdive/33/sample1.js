@@ -11,16 +11,43 @@ const symbol2 = Symbol('mySymbol');
 
 console.log(symbol1 === symbol2);
 
-let user = {
+// let user = {
+//   name: 'raehan',
+//   // id: 1,
+// }
+
+// let id = Symbol("id");
+
+// user[id] = 1;
+
+// console.log(user)
+
+// console.log(user.id);
+// console.log(user.symbol("id"))
+
+
+// const statusList = ['PENDING', 'SUCCESS', 'RUNNING'];
+
+// export const apiStatus = statusList.reduce((acc, key) => {
+//   acc[[key]] = Symbol(key);
+//   return acc;
+// }, {});
+
+// let symbolUser = {
+//   name: 'reahan',
+//   id: 1,
+//   [id]: 2
+// }
+
+// console.log(symbolUser)
+
+const name = Symbol('name');
+const user = {
   name: 'raehan',
+  [name]: 'jeong', // 리터럴 일땐 대괄호로 심볼 값 추가
   id: 1,
 }
+const id = Symbol('id');
 
-let id = Symbol("id");
-
-user[id] = 1;
-
+user[id] = 2;
 console.log(user)
-
-console.log(user.id);
-console.log(user.symbol("id"))
