@@ -27,13 +27,13 @@
     console.log(PENDING, SUCCESS, RUNNING); // Symbol(PENDING) Symbol(SUCCESS) Symbol(RUNNING)
     ```
     
-보통은 그냥 문자열을 쓴다.
+    보통은 그냥 문자열을 쓴다.
 
-```jsx
-export const PENDING = 'PENDING';
-export const SUCCESS = 'SUCCESS';
-export const RUNNING = 'RUNNING';
-```
+    ```jsx
+    export const PENDING = 'PENDING';
+    export const SUCCESS = 'SUCCESS';
+    export const RUNNING = 'RUNNING';
+    ```
 
 2. 모달, 토스트메세지, 노티피케이션 등의 기능 구현
     
