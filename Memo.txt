@@ -62,3 +62,21 @@ https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt
 /Users/raehan/.zshrc:116: parse error near `\n'
 ╭─ ~ ────────────────────────────────────────────────────────── ✔  16:35:50
 ╰─
+
+// 아울렛
+
+현대 아울렛(김포)
+한섬
+MUE
+타임 시스템
+Mine
+더 캐시미어
+솔리드
+LF(알레그리, 질스튜디오 뉴욕)
+
+삼성 제일모직
+비커
+마가지니(르메르, 메종키츠네, 아미)
+
+신세계
+분더샵
