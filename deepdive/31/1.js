@@ -82,3 +82,13 @@ console.log(target4.match(/[A-Z]+/ig)); // [ 'AA', 'BB', 'Aa', 'Bb' ]
 const target5 = "A B 12,345";
 console.log(target5.match(/[0-9]+/g)); // [ '12', '345' ]
 console.log(target5.match(/[0-9,]+/g)); // [ '12,345' ]
+
+// # \d 는 숫자 \D 는 숫자가 아닌 문자
+console.log(target5.match(/[\d,]+/g)); // [ '12,345' ]
+console.log(target5.match(/[\D,]+/g)); // [ 'A B ', ',' ]
+
+// # \w 는 알파벳, 숫자, 언더스코어 === [A-Za-z0-9_] <-> /W 는 반대
+const target6 = "Aa Bb 12,345,678 _$%^";
+
+console.log(target6.match(/[\w,]+/g)); // [ 'Aa', 'Bb', '12,345,678', '_' ]
+console.log(target6.match(/[\W,]+/g)); // [ ' ', ' ', ',', ',', ' ', '$%^' ]

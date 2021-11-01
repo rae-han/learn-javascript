@@ -58,3 +58,7 @@
     user[id] = 2;
     console.log(user); // { name: 'raehan', id: 1, [Symbol(name)]: 'jeong', [Symbol(id)]: 2 }
     ```
+
+
+
+
