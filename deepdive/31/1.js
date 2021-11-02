@@ -92,3 +92,5 @@ const target6 = "Aa Bb 12,345,678 _$%^";
 
 console.log(target6.match(/[\w,]+/g)); // [ 'Aa', 'Bb', '12,345,678', '_' ]
 console.log(target6.match(/[\W,]+/g)); // [ ' ', ' ', ',', ',', ' ', '$%^' ]
+
+// # ^ in [...] 은 not의 의미를 갖는다.
