@@ -45,7 +45,8 @@ console.log(regExp6.test(testcase7));
 console.log(regExp7.test(testcase7));
 
 // * 메일 형식에 맞는지 검사
-const regExp8 = /^[A-Za-z0-9._]+@[A-Za-z0-9]+\.[A-Za-z]+$/;
+const regExp8 = /^[A-Za-z0-9._]+@[A-Za-z0-9]+(\.[a-zA-Z]{2,2})*\.[A-Za-z]+$/;
+// 
 
 const testcase8 = "raehan900809@gmail.com";
 const testcase9 = "jrh900809@naver.co.kr";
