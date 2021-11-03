@@ -94,3 +94,15 @@ console.log(target6.match(/[\w,]+/g)); // [ 'Aa', 'Bb', '12,345,678', '_' ]
 console.log(target6.match(/[\W,]+/g)); // [ ' ', ' ', ',', ',', ' ', '$%^' ]
 
 // # ^ in [...] 은 not의 의미를 갖는다.
+const target7 = "AA BB 12 Aa Bb";
+console.log(target7.match(/[^0-9]+/g)); // [ 'AA BB ', ' Aa Bb' ]
+
+// # ^ out [...] 은 문자열의 시작을 의미
+const target8 = "https://google.com";
+console.log(/^http/.test(target8)); // true
+
+// # $ 는 문자열의 마지막을 의미한다.
+
+console.log(/com$/.test(target8)); // true
+
+// # \s는 공백
