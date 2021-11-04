@@ -54,4 +54,23 @@ const testcase9 = "jrh900809@naver.co.kr";
 console.log(regExp8.test(testcase8));
 console.log(regExp8.test(testcase9));
 
+// * 핸드폰 번호 형식에 맞는지 검사
+const regExp9 = /01[0-9]-?[0-9]{3,4}-?[0-9]{4}/;
+const regExp10 = /01\d-?\d{3,4}-?\d{4}/;
+const testcase10 = "01071121906";
+const testcase11 = "010-7112-1906";
+
+console.log(regExp9.test(testcase10));
+console.log(regExp9.test(testcase11));
+console.log(regExp10.test(testcase10));
+console.log(regExp10.test(testcase11));
+
+// * 특수문자가 있는지 검사
+const target9 = "abc@123";
+const regExp11 = /^[0-9a-zA-Z]/;
+
+console.log(regExp11.test(target9));
+
+
+
 
