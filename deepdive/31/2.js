@@ -71,6 +71,6 @@ const regExp11 = /^[0-9a-zA-Z]/;
 
 console.log(regExp11.test(target9));
 
-
-
+console.log(target9.match(/.+/g));
+// console.log(target9.match(/[]*+/g));
 
