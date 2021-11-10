@@ -151,3 +151,14 @@ console.log(array);
 
 console.log(new Set(array))
 console.log([...new Set(array)]);
+
+
+/* 
+
+https://m.ppomppu.co.kr/new/bbs_view.php?id=relay&no=557217
+
+https://m.ppomppu1.co.kr/new/bbs_view.php?id=relay&no=560038
+
+https://m.ppomppu1.co.kr/new/bbs_view.php?id=relay&no=567689
+
+*/
