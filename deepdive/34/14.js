@@ -12,3 +12,7 @@ const fibonacciFunc = function (max) {
     }
   };
 };
+
+for (const num of fibonacciFunc(15)) {
+  console.log(num); // 1 2 3 5 8 13
+}

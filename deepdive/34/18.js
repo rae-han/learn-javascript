@@ -1,0 +1,20 @@
+const fibonacciFunc = function () {
+  let [pre, cur] = [0, 1];
+
+  return {
+    [Symbol.iterator]() { return this; },
+    next() {
+      [pre, cur] = [cur, pre + cur];
+      return { value: cur };
+    }
+  };
+};
+
+for (const num of fibonacciFunc()) {
+  if (num > 10000) break;
+  console.log(num); // 1 2 3 5 8...4181 6765
+}
+
+// 배열 디스트럭처링 할당을 통해 무한 이터러블에서 3개의 요소만 취득한다.
+const [f1, f2, f3, f4, f5, f6] = fibonacciFunc();
+console.log(f1, f2, f3, f4, f5, f6); // 1 2 3 5 8 13
