@@ -27,30 +27,4 @@ console.log(iter.next()); // { value: 5, done: false }
 console.log(iter.next()); // { value: 8, done: false }
 console.log(iter.next()); // { value: 13, done: true }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+console.log(iter[Symbol.iterator]() === iter)
