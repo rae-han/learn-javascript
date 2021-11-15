@@ -17,3 +17,4 @@ console.log(it.next().value); // 'ya'
 console.log(it.next().done);  // true
 
 for(const i of it) { console.log(i) } // it[Symbol.iterator] is not a function
+
