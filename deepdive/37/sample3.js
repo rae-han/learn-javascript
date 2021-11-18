@@ -10,7 +10,7 @@
 const map = new Map();
 const set = new Set();
 
-console.log(map instanceof Map)
-console.log(map instanceof Object)
-console.log(set instanceof Set)
-console.log(set instanceof Object)
+console.log(map instanceof Map);
+console.log(map instanceof Object);
+console.log(set instanceof Set);
+console.log(set instanceof Object);
