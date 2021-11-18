@@ -4,8 +4,8 @@ const setA = new Set([1, 2, 3, 4]);
 const setB = new Set([1, 2, 5, 6]);
 const setC = new Set([1, 2, 3, 4, 5, 6]);
 
-Set.prototype.intersection = function(set) { // 왜 화살표 함수는 안될까?
-// Set.prototype.intersection = (set) => { // 왜 화살표 함수는 안될까?
+Set.prototype.intersection1 = function(set) { // 왜 화살표 함수는 안될까?
+// Set.prototype.intersection1 = (set) => { // 왜 화살표 함수는 안될까?
   const result = new Set();
 
   for (const value of this) {
@@ -15,13 +15,13 @@ Set.prototype.intersection = function(set) { // 왜 화살표 함수는 안될�
   return result;
 }
 
-console.log(setA.intersection(setB));
+console.log(setA.intersection1(setB));
 
-Set.prototype.intersectionFunc = function(set) {
+Set.prototype.intersection2 = function(set) {
   return new Set([...this].filter(item => set.has(item)));
 };
 
-console.log(setA.intersectionFunc(setB));
+console.log(setA.intersection2(setB));
 
 
 // 합집합
