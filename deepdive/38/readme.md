@@ -17,3 +17,8 @@
 >     
 
 ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/90e41aa4-cdfa-4872-9106-2983de8d2418/Untitled.png)
+
+1. 브라우저는 렌더링에 필요한 리소스를 요청하고 서버로부터 응답을 받는다.
+2. 브라우저의 렌더링 엔진은 서버로부터 응답된 HTML, CSS를 파싱하여 DOM과 CSSOM을 생성하고 이들을 결합하여 렌더 트리를 생성한다.
+3. 브라우저의 자바스크립트 엔진은 서버로부터 응답된 자바스크립트를 파싱하여 AST(Abstract Syntax Tree)를 생성하고 바이트코드로 변환하여 실행한다. 이때 자바스크립트는 DOM API를 통해 DOM, CSSOM을 변경할 수 있다. 변경된 DOM, CSSOM은 다시 렌더 트리로 결합된다.
+4. 렌더트리를 기반으로 HTML 요소의 레이아웃을 계산하고 브라우저 화면에 HTML 요소를 페인팅한다.
