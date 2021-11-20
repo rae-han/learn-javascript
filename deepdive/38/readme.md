@@ -16,7 +16,7 @@
 >     랜더링은 HTML, CSS, Javascript로 작성된 문서를 파싱하여 브라우저에 시각적으로 출력하는 것.
 >     
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/90e41aa4-cdfa-4872-9106-2983de8d2418/Untitled.png)
+![Untitled](https://raehan.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F90e41aa4-cdfa-4872-9106-2983de8d2418%2FUntitled.png?table=block&id=b087243c-4ed1-4fb2-9945-c235d6411e79&spaceId=1574d36f-c0a8-4012-aef3-9f7f7ca3b40f&width=2000&userId=&cache=v2)
 
 1. 브라우저는 렌더링에 필요한 리소스를 요청하고 서버로부터 응답을 받는다.
 2. 브라우저의 렌더링 엔진은 서버로부터 응답된 HTML, CSS를 파싱하여 DOM과 CSSOM을 생성하고 이들을 결합하여 렌더 트리를 생성한다.
