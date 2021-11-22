@@ -37,4 +37,6 @@ URL(Uniform Resource Identifier) - 위: 기존 노드의 url 구분 방법, 아�
 책에서는 scheme(=protocol), domain(=host)이 같다하고 hash 대신 fragment 라는 용어를 사용하였다.
 또한 전체를 URI로 부르고 protocol~pathname은 URL(Uniform Resource Locator), hostname~hash는 URN(Uniform Resource Name)이라 한다.
 
-예를 들어, 브라우저 주소창에 [https://poiemaweb.com](https://poiemaweb.com)을 입력하고 에너키를 누르면 루트 요청(= /, 스킴과 호스트만으로 구성된 URI에 의한 요청)이 poiemaweb.com 서버로 전송된다. 루트 요청에 명확히 리소스를 요청하는 내용이 없다면 암묵적으로 index.html을 응답하도록 기본 설정되어 있다.
+예를 들어, 브라우저 주소창에 [https://poiemaweb.com](https://poiemaweb.com)을 입력하고 에너키를 누르면 루트 요청(= /, 스킴과 호스트만으로 구성된 URI에 의한 요청)이 poiemaweb.com 서버로 전송된다. 루트 요청에 명확히 리소스를 요청하는 내용이 없다면 암묵적으로 index.html을 응답하도록 기본 설정되어 있다. 
+
+만약 해당 index.html 에서 다른 정적 파일을 서버에 요청하려면 정적 파일의 경로를 host뒤 pathname에 기술하여 서버에 요청하면 된다.
