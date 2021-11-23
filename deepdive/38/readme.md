@@ -93,20 +93,132 @@ HTTP(HyperText Transfer Protocol)는 웹에서 브라우저와 서버가 통신�
             - 전송속도(상대적) - 느림 : 빠름
             - 혼잡제어 - 가능 : 불가능
             - 헤더크기 - 20바이트 : 8바이트
-    - 
+            
+
+# 3. HTML 파싱과 DOM 생성
+
+브라우저의 요청에 의해 서버가 응답한 HTML 문서는 문자열로 이뤄진 순수한 텍스트인데 이것을 브라우저에서 렌더링하려면 브라우저가 해석할 수 있는 자료구조(객체)로 변환하여 메모리에 저장해야 한다.
+
+브라우저의 렌더링 엔진은 서버로부터 응답받은 HTML 문서를 파싱하여 브라우저가 해석 할 수 있는 자료구조인 DOM(Document Object Model)을 생성한다.
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8004ea58-b41a-4a34-a73a-7f2c09cec3e7/Untitled.png)
+
+1. 브라우저의 요청에 의해 서버에서 HTML 파일이 응답된다. 이때 서버는 브라우저가 요청한 HTML 파일을 읽어 바이트 코드로 메모리에 저장한 다음 인터넷을 경유하여 응답한다.
+2. 브라우저가 응답 받은 바이트(2진수) 형태의 HTML 문서는 meta 태그의 charset 어트리뷰트에 의해 지정된 인코딩 방식(ex. UTF-8) 기준으로 문자열로 변환된다.
+    - 참고로 meta 태그의 charset 어트리뷰트에 선언된 인코딩 방식은 content-type: text/html; charset=utf-8과 같이 응답 헤더(reponse header)에 담겨 응답되는데 브라우저는 이를 확인하고 문자열로 변환된다.
+3. 문자열로 변환된 HTML 문서를 읽어 들여 문법적 의미를 갖는 코드의 최소 단위인 토큰(token)들로 분해한다.
+4. 각 토큰들을 객체로 변환하여 노드(node)들을 생성하는데 토큰의 내용에 따라 문서 노드, 요소 노드, 어트리뷰트 노드, 텍스트 노드가 생성된다. 노드는 이후 DOM을 구성하는 기본 요소가 된다.
+5. HTML 문서는 HTML 요소들의 집합으로 이루어지며 HTML요소는 중첩 관계를 갖는다. 즉 HTML 요소의 콘텐츠 영역(시작 태그와 종료 태그 사이)에는 텍스트 뿐 아니라 다른 HTML요소도 포함될수 있다. 이때 HTML 요소 간에는 중첩 관계에 의해 부자 관계가 형성된다. 이런 HTML 요소 간의 부자 관계를 반영하여 모든 노드들을 트리 자료구조로 구성하고 이 자료 구조를 DOM(Document Object Model)이라 부른다.
+
+즉 DOM은 HTML 문서를 파싱한 결과물이다.
+
+# 4. CSS 파싱과 CSSDOM 생성
+
+렌더링 엔진은 HTML을 파싱하여 DOM을 생성해 나가다 CSS를 로드하는 link 태그나 style 태그를 만나면 DOM 생성을 일시 중단한다.
+
+그리고 link 태그의 href 어트리뷰트에 지정된 CSS 파일을 서버에 요청하여 로드한 CSS 파일이나 style 태그 내의 CSS를 HTML과 동일한 파싱 과정(바이트 → 문자 → 토큰 → 노드 → CSSOM)을 거치며 해석하여 CSSOM(CSS Object Model)을 생성하고 파싱 완료 후 HTML 파싱이 중단된 시점부터 다시 HTML을 파싱한다.
+
+CSSOM은 CSS의 상속을 반영하여 생성된다. 다만 모든 프로퍼티가 상속 되는건 아니다.
+
+- 상속 되는 프로퍼티: visibility, opacity, font, color, line-height, text-align, white-space 등.
+- 상속 되지 않는 프로퍼티: width, height, margin, padding, border, box-sizing, display, background, vertical-align, text-decoration, position, top, right, bottom, left, z-index, overflow, float 등.
+
+### 캐스캐이딩(Cascading)
+
+요소는 하나 이상의 CSS 선언어 영향을 받을 수 있다. 이때 충돌을 피하기 위해 CSS 적용 우선순위가 필요한데 이를 캐스캐이딩(Cascading Order)이라 한다.
+
+1. 중요도:  CSS가 어디에 선언 되었는지에 따라 우선순위가 다르다.
+2. 명시도: 대상을 명확하게 특정할수록 명시도가 높아지고 우선순위가 높아진다.
+3. 선언순서:나중에 선언된 스타일이 우선 적용된다.
+
+- 중요도
     
-    # ref. 참조
+    CSS가 어디에 선언되었는지에 따라 우선순위가 달라진다.
     
-    [https://seokbeomkim.github.io/posts/http1-http2/#server-push](https://seokbeomkim.github.io/posts/http1-http2/#server-push)
+    1. head 요소 내의  style 요소
+    2. head 요소 내의  style 요소 내의 @import 문
+    3. <link>로 연결된 CSS파일
+    4. <link>로 연결된 CSS 파일 내의 @import 문
+    5. 브라우저의 디폴트 스타일시트
+
+- 명시도
     
-    [https://withbundo.blogspot.com/2021/08/httphttp2-http2.html](https://withbundo.blogspot.com/2021/08/httphttp2-http2.html)
+    대상을 명확하게 특정할수록 명시도가 높아지고 우선순위가 높다.
     
-    [https://yceffort.kr/2021/05/http1-vs-http2](https://yceffort.kr/2021/05/http1-vs-http2)
+    1. !important
+    2. 인라인 스타일
+    3. 아이디 선택자
+    4. 클래스/어트리뷰트/가상 선택자
+    5. 태그 선택자 > 전체 선택자
+    6. 상위 요소에 의해 상속된 속성
     
-    [https://cottonblue.tistory.com/29](https://cottonblue.tistory.com/29)
+- 선언순서
     
-    [https://velog.io/@zzzz465/HTTP1.1-2-3-의-차이점](https://velog.io/@zzzz465/HTTP1.1-2-3-%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90)
+    선언된 순서에 따라 우선 순위가 적용 되는데, 나중에 선언된 스타일이 우선 선언된다.
     
-    [https://ijbgo.tistory.com/26](https://ijbgo.tistory.com/26)
-    
-    [https://woojinger.tistory.com/85](https://woojinger.tistory.com/85)
+
+# 5. 렌더 트리 생성
+
+렌더링 엔진은 서보로부터 응답된 HTML, CSS를 파싱하여 각각 DOM, CSSOM을 생성하고 생성한 DOM과 CSSOM은 렌더링을 위해 렌더 트리(render tree)로 결합된다.
+
+렌더 트리는 렌더링을 위한 트리 구조의 자료구조로 브라우저 화면에 렌더링 되는 노드만으로 구성된다. 브라우저 화면에 렌더링되지 않는 노드(ex. meta  태그, script 태그 등)와  CSS에 의해 비표시(ex. display: none)되는 노드들은 포함하지 않는다.
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fab626bc-24a2-4867-9f46-b309fc30b022/Untitled.png)
+
+이후 완성된 렌더 트리는 각 HTML 요소의 레이아웃을 계산하는 데 사용되며 브라우저 화면에 렌더링하는 페인팅 처리에 입력된다.
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/de43218d-5d34-468a-88f2-30bf09d9407a/Untitled.png)
+
+위의 브라우저 렌더링 과정은 반복해서 실행될 수 있다. 예로 아래의 경우가 있다.
+
+- 자바스크립트에 의한 노드 추가 또는 삭제
+- 브라우저 창의 리사이징에 의한 뷰포트(viewport)  크기 변경
+- HTML 요소의 레이아웃에 변경을발생시키는 width/height, margin, padding, border, display, position, top/right/bottom/left 등의 스타일 변경.
+
+레이아웃 계산과 페인팅을 다시 실행하는 리렌더링은 비용이 많이 드는, 성능에 악영향을 주는 작업으로 리렌더링이 빈번하게 발생하지 않도록 주의할 필요가 있다.
+
+# 6. 자바스크립트 파싱과 실행
+
+HTML 문서를 파싱한 결과물로 생성된 DOM은 HTML 문서의 구조와 정보뿐만 아니라 HTML 요소와 스타일 등을 변경할 수 있는 프로그래밍 인터페이스로서 DOM API를 제공한다. 즉, 자바스크립트 코드에서 DOM API를 사용하면 이미 생성된 DOM을 동적으로 조작할 수 있다.
+
+CSS 파싱 과정과 마찬가지로 렌더링 엔진은 HTML을 파싱하여 DOM을 생성하다 자바스크립트 파일을 로드하는 script 태그나 자바스크립트 코드를 콘텐츠로 담은 script 태그를 만나면 DOM 생성을 일시 중단한다.
+
+그리고 자바스크립트 코드를 파싱하기 위해 자바스크립트 엔진에 제어권을 넘긴다. 그 후 자바스크립트 파싱과 실행이 종료되면 렌더링 엔진으로 다시 제어권을 넘겨 HTML을 파싱한다.
+
+자바스크립트 파싱과 실행은 브라우저 렌더링 엔진이 아닌 자바스크립트 엔진이 처리한다. 자바스크립트 엔진은 자바스크립트 코드를 파싱하여 CPU가 이해할 수 있는 저수준 언어(low-level language)로 변환하고 실행하는 역할을 한다. 자바스크립트 엔진은 다양한 종류가 있으며 모두 ECMAScript 사양을 준수한다.
+
+자바스크립트 엔진은 자바스크립트 코드를 파싱하는데 HTML, CSS를 파싱하여 DOM, SCCOM을 생성하듯 자바스크립트 엔진은 자바스크립트를 실행하여 AST(Abstract Syntax Tree) 를 생성한다. 그리고 AST를 기반으로 인터프리터가 실행 할 수 있는 중간 코드(intermediate code)인 바이트코드를 생성하여 실행한다.
+
+자바스크립트 코드 → (자바스크립트 엔진) → 바이트 코드 → (가상머신) → 기계어
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b2454bfa-4711-4e42-ac4e-f66f85c0d30c/Untitled.png)
+
+### 토크나이징
+
+단순한 문자열인 자바스크립트 소스코드를 어휘 분석하여 문법적 의미를 갖는 코드의 최소 단위인 토큰들로 분해한다. 이 과장을 렉싱이라 부르기도 하지만 토크나이징과 미묘한 차이가 있다.
+
+### 파싱
+
+토큰들의 집합을 구문 분석하여 AST(추상적 구문 트리)를 생성한다.
+
+AST는 토큰에 문법적 의미와 구조를 반영한 트리 구조의 자료구조이며, 인터프리터나 컴파일러만이 사용하는 것은 아니다. AST를 사용하면 TypeScript, Babel, Prettier 같은 트랜스파일러를 구현할 수도 있다.  AST Explorer 웹사이트에 방문하면 다양한 오픈소스 자바스크립트 파서를 사용하여 AST를 생성해 볼 수 있다.
+
+### 바이트코드 생성과 실행
+
+파싱의 결과물로 생성된 AST는 인터프리터가 실행할 수 있는 중간 코드인 바이트코드로 변환되고 인터프리터에 의해 실행된다. V8 엔진의 경우 자주 사용되는 코드는 터보팬이라 불리는 컴파일러에 의해 최적화된 머신 코드로 컴파일되어 성능을 최적화하고 코드의 사용 빈도가 적어지면 다시 디옵티마이징하기도 한다.
+
+# ref. 참조
+
+[https://seokbeomkim.github.io/posts/http1-http2/#server-push](https://seokbeomkim.github.io/posts/http1-http2/#server-push)
+
+[https://withbundo.blogspot.com/2021/08/httphttp2-http2.html](https://withbundo.blogspot.com/2021/08/httphttp2-http2.html)
+
+[https://yceffort.kr/2021/05/http1-vs-http2](https://yceffort.kr/2021/05/http1-vs-http2)
+
+[https://cottonblue.tistory.com/29](https://cottonblue.tistory.com/29)
+
+[https://velog.io/@zzzz465/HTTP1.1-2-3-의-차이점](https://velog.io/@zzzz465/HTTP1.1-2-3-%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90)
+
+[https://ijbgo.tistory.com/26](https://ijbgo.tistory.com/26)
+
+[https://woojinger.tistory.com/85](https://woojinger.tistory.com/85)
