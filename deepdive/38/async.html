@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>async</title>
+  <script async src="./asyncScript.js"></script>
+</head>
+<body>
+  <div id="pre">Previous</div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => console.log('DOM이 준비 되었습니다.'));
+    document.addEventListener('DOMContentLoaded', console.dir(document.querySelector('#pre')));
+  </script>
+
+  <script>
+    console.log(`body end tag of async`);
+  </script>
+</body>
+</html>

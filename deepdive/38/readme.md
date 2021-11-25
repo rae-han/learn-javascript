@@ -254,11 +254,153 @@ HTML 파싱과 외부 자바스크립트 파일의 로드가 비동기적으로 
 
 여러 개의  script 태그에 async를 지정하면 script 태그의 순서와는 상관없이, 로드가 완료된 자바스크립트부터 먼저 실행되므로 순서가 보장되 않는다. 순서 보장이 필요한 script 태그에는 async 어트리뷰트를 지정하지 않아야한다.
 
+방문자 수 카운터나광고 관련 스크립트같이 독립적인 스크립트에 혹은 실행 순서가 중요하지 않은 경우에 적용한다.
+
 ### defer
 
-HTML 파싱과 외부 자바스크립트 파일의 로드가 비동기적으로 동시에 진행된다. 단, 자바스크립트의 파싱과 실행은 HTML 파싱이 완료된 직후, 즉 DOM 생성이 완료된 직후 진행된다.
+HTML 파싱과 외부 자바스크립트 파일의 로드가 비동기적으로 동시에 진행된다. 단, 자바스크립트의 파싱과 실행은 HTML 파싱이 완료된 직후, 즉 DOM 생성이 완료된 직후(DOMContentLoaded 이벤트 발생 전) 진행된다.
+
+→ DOMContentLoaded는 document만 완료되면 실행, load는 css나 이미지 같은 것들 다 받은 후 실행.
 
 DOM 생성이 완료된 이후 실행되어야 할 자바스크립트에 유용하다.
+
+문서에 추가된 순서대로 실행된다.
+
+## 9.1. 동적 스크립트(dynamic script)
+
+스크립트를 동적으로 추가 하는 것을 동적 스크립트라 부르고 기본적으로 async 어트리뷰터가 있는 것처럼 행동한다.
+
+async의 특성과 같이 어떤 것도 기다리지 않고 어떤 것도 스크립트를 기다리지 않기 때문에 먼저 다운로드된 스크립트가 먼저 실행된다.
+
+순서가 중요하다면 반드시 async 어트리뷰트를 false로 설정해 줘야한다.
+
+```jsx
+function loadScript(src) {
+  let script = document.createElement('script');
+  script.src = src;
+  script.async = false;
+  document.body.append(script);
+}
+
+loadScript("/article/script-async-defer/long.js"); // 크기가 큰 파일
+loadScript("/article/script-async-defer/small.js"); // 크기가 작은 파일
+```
+
+## 9.2. 정리
+
+### 9.2.1. head  안에 일반 스크립트
+
+```jsx
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="main.js"></script>
+</head>
+<body>
+</body>
+</html>
+```
+
+- 로드 순서
+    
+    HTML 파싱 → JS파일 발견 → HTML 파싱 멈춤 → JS 패칭 → JS 실행 → 다시 HTML 파싱
+    
+- 장점
+    
+    상황에 따라 페이지를 보여주지 말아야 할 때 적은 네트워크 자원으로 가능하다.
+    
+- 단점
+    
+    JS파일의 크기가 크거나, 인터네싱 느리면 사용자가 웹사이트를 보기까지 오래 걸린다.
+    
+
+### 9.2.2. body 끝에 일반 스크립트
+
+```jsx
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+  <script src="main.js"></script>
+</body>
+</html>
+```
+
+- 로드 순서
+    
+    BODY 태그 끝까지 HTML 파싱 → JS파일 발견 → JS 패칭 → JS 실행
+    
+- 장점
+    
+    HTML 컨텐츠를 빠르게 본다는 장점
+    
+- 단점
+    
+    의미있는 컨텐츠가 JS파일에 의존적이면 사용자가 기다려야 한다.
+    
+
+### 9.2.3. head 안에 async를 사용한 스크립트
+
+```jsx
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="main.js"></script>
+</head>
+<body>
+</body>
+</html>
+```
+
+- 로드 순서
+    
+    HTML 파싱 + JS파일 패칭 → JS파일 패칭 완료 → HTML 파싱 멈춤 → JS파일 실행 → 다시 HTML 파싱
+    
+- 장점
+    
+    HTML 파싱과 JS 패칭이 병렬적으로 일어나서 다운로드 시간을 줄인다.
+    
+- 단점
+    
+    JS가 HTML이 파싱되기도 전에 실행돼서 JS파일과 관련된 HTML의 요소가 파싱되지 않아 정의 되지 않았을 경우 페이지 로드의 위험이 있다.
+    
+    JS파일의 실행 순서를 보장하지 않는다
+    
+
+### 9.2.4. head 안에 defer를 사용한 스크립트
+
+```jsx
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script defer src="main.js"></script>
+</head>
+<body>
+</body>
+</html>
+```
+
+- 로드 순서
+    
+    HTML 파싱 + JS 패칭 → HTML 파싱 완료 → 패칭된 JS파일 실행
+    
+- 장점
+    
+    HTML 파싱과 JS패칭이 병렬로 수행됨.
+    
+    여러 JS파일을수행 할 경우, 패칭을 병렬로 동시에 일어나고, 실행의 순서는 절차적으로 수행된다.
+    
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1f10d629-6c9c-4ec1-8c64-8951ae13dab6/Untitled.png)
+
+# 10. 웹페이지를 방문할 때 일어나는 과정.
+
+1. 브라우저에 도메인을 입력한다.
+2. 네임서버에서 해당 도메인에 해당하는 IP를 가져온다.
+3. 해당 IP주소에 해당하는 서버 컴퓨터(웹서버)에 요청한다.
+4. 웹서버는 요청에 해당되는 응답을 저장장치 or 다른 서버로의 요청와 응답에서 구한 후 응답한다.
+5. 응답받은 파일을 인터프린터로 해석하여 화면에 보여준다.
 
 # ref. 참조
 
