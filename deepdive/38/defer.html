@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>defer</title>
+  <script defer src="./deferScript.js"></script>
+</head>
+<body>
+  <div id="pre">Previous</div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => console.log('defer 스크립트 실행된 후, DOM이 완전히 준비된다.'));
+    document.addEventListener('DOMContentLoaded', console.dir(document.querySelector('#pre')));
+  </script>
+
+  <script>
+    console.log(`body end tag of defer`);
+  </script>
+</body>
+</html>
