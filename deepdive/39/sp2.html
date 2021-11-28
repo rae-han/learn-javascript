@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul id="list">
+    <li class="item a">a</li>
+    <li class="item b">b</li>
+    <li class="item c">c</li>
+    <li class="item d">d</li>
+  </ul>
+
+  <script>
+    const $a = document.querySelector('.a');
+    console.log($a);
+
+    console.log($a.parentNode);
+    $a.parentNode = null;
+    console.log($a.parentNode);
+  </script>
+</body>
+</html>
