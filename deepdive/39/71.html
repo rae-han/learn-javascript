@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="InputText" value="random text" name="input-text">
+  <button onclick="showValue()">click</button>
+
+  <div class="large">
+    <div class="small a">a</div>
+    <div class="small b">b</div>
+    <div class="small c">c</div>
+    <div class="small d">d</div>
+  </div>
+
+  <script>
+    const showValue = () => {
+      const inputText = document.getElementById('InputText');
+      console.log(inputText.getAttribute('value'));
+      console.log(inputText.value);
+    };
+  </script>
+</body>
+</html>
