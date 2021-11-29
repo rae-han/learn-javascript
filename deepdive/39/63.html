@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul id="fruits">
+    <ul>
+      <li>a</li>
+    </ul>
+    <li>Apple</li>
+    <li>Banana</li>
+  </ul>
+
+  <script>
+    const $fruits = document.getElementById('fruits');
+
+    // const $orange = document.createElement('li');
+    // $orange.appendChild(document.createTextNode('Orange'));
+
+    // console.log($fruits.lastChild); // #text
+    // // $fruits.insertBefore($orange, $fruits.lastElementChild);
+    // $fruits.insertBefore($orange, null);
+
+    // console.log('children', $fruits.children);
+    const [$apple, $banana, ...rest] = $fruits.children;
+
+    // console.log('apple, banana', $apple, $banana);
+
+    // $fruits.appendChild($apple);
+    // $fruits.insertBefore($banana, $fruits.lastElementChild);
+
+    const $shallowClone = $apple.cloneNode();
+    $shallowClone.textContent = 'Orange'
+    const $deepClone = $fruits.cloneNode(true);
+
+    $fruits.appendChild($shallowClone);
+    $fruits.appendChild($deepClone);
+  </script>
+</body>
+</html>
