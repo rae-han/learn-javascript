@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button class="btn">btn</button>
+  <button class="btn" onclick="onClickFunc(event)">btn</button>
+  <button class="event-listener">btn</button>
+
+  <script>
+    const $btn = document.querySelectorAll('.btn')[0];
+
+    const commonFunction = (e) => {
+      console.log(e);
+
+      console.log(e.clientX, e.clientY);
+    }
+
+    $btn.onclick = (e) => { 
+      console.log('click!!');
+      commonFunction(e);
+    }
+
+    const onClickFunc = (e) => {
+      console.log('click!!!!')
+      commonFunction(e);;
+    };
+
+    $btn.addEventListener('click', (e) => {
+      console.log('click!!!!!!');
+      commonFunction(e);
+    });
+  </script>
+</body>
+</html>
