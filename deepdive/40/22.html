@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <input type="text">
+  <input type="checkbox">
+  <button>Click me!</button>
+  <script>
+    const $input = document.querySelector('input[type=text]');
+    const $checkbox = document.querySelector('input[type=checkbox]');
+    const $button = document.querySelector('button');
+
+    const Log = (value) => console.log(value)
+
+    window.onload = console.log;
+
+    $checkbox.onchange = console.log;
+    $input.onfocus = console.log;
+    $input.oninput = console.log;
+    $input.onkeyup = console.log;
+    $button.onclick = console.log;
+
+    window.onload = e => {
+      console.log('onload')
+      console.log(e);
+      $checkbox.onchange(e);
+      $input.onfocus(e);
+      $input.oninput(e);
+      $input.onkeyup(e);
+      $button.onclick(e);
+    }
+  </script>
+</body>
+</html>

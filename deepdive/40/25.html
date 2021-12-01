@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: green;
+      border: 5px solid orange;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+
+  <script>
+    const $box = document.querySelector('.box');
+    console.log($box)
+
+    const initMousePos = { x: 0, y: 0 };
+    const offset = { x: 0, y: 0 };
+
+    const move = e => {
+      offset.x = e.clientX - initMousePos.x;
+      offset.y = e.clientY - initMousePos.y;
+
+      console.log(offset.x, offset.y);
+
+      $box.style.transform = `translate3d(${offset.x}px, ${offset.y}px, 0)`;
+    }
+
+    $box.addEventListener('mousedown', e => {
+      initMousePos.x = e.clientX - offset.x;
+      initMousePos.y = e.clientY - offset.y;
+
+      console.log(initMousePos.x, initMousePos.y);
+
+      document.addEventListener('mousemove', move);
+    })
+
+    $box.addEventListener('mouseup', () => {
+      document.removeEventListener('mousemove', move);
+    })
+  </script>
+</body>
+</html>

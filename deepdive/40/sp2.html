@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .large {
+      width: 200px;
+      height: 200px;
+      background-color: green;
+    }
+    .medium {
+      width: 150px;
+      height: 150px;
+      background-color: blue;
+    }
+    .small {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+    .large, .medium, .small {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="large square">
+    <h1 class="medium square">
+      <p class="small square"></p>
+    </h1>
+  </div>
+
+  <script>
+    const $squareList = document.querySelectorAll('.square');
+    console.log($squareList);
+
+    const [$large, $medium, $small] = $squareList;
+
+    // // 1: 캡처링 단계, 2: 타깃 단계, 3: 버블링 단계
+    const isCAPTURING = true // true: capturing, false: bubbling
+
+
+    //*
+    $large.addEventListener('click', e => {
+      console.log(`a 이벤트 단계: ${e.eventPhase}`);
+      console.log(`이벤트 타깃: ${e.target}`); 
+      console.log(`커런트 타깃: ${e.currentTarget}`);
+    });
+
+    $medium.addEventListener('click', e => {
+      console.log(`b 이벤트 단계: ${e.eventPhase}`);
+      console.log(`이벤트 타깃: ${e.target}`); 
+      console.log(`커런트 타깃: ${e.currentTarget}`);
+    });
+
+    $small.addEventListener('click', e => {
+      console.log(`c 이벤트 단계: ${e.eventPhase}`);
+      console.log(`이벤트 타깃: ${e.target}`); 
+      console.log(`커런트 타깃: ${e.currentTarget}`);
+    });
+    //*/
+    // c 2
+    // b 3
+    // a 3
+
+    //*
+    $large.addEventListener('click', e => {
+      console.log(`d 이벤트 단계: ${e.eventPhase}`);
+      console.log(`이벤트 타깃: ${e.target}`); 
+      console.log(`커런트 타깃: ${e.currentTarget}`);
+    }, isCAPTURING);
+
+    $medium.addEventListener('click', e => {
+      console.log(`e 이벤트 단계: ${e.eventPhase}`);
+      console.log(`이벤트 타깃: ${e.target}`); 
+      console.log(`커런트 타깃: ${e.currentTarget}`);
+    }, isCAPTURING);
+
+    $small.addEventListener('click', e => {
+      console.log(`f 이벤트 단계: ${e.eventPhase}`);
+      console.log(`이벤트 타깃: ${e.target}`); 
+      console.log(`커런트 타깃: ${e.currentTarget}`);
+    }, isCAPTURING);
+    // */
+    // d 1
+    // e 1
+    // f 2
+
+    //*
+    $large.addEventListener('click', e => {
+      console.log(`g 이벤트 단계: ${e.eventPhase}`);
+      console.log(`이벤트 타깃: ${e.target}`); 
+      console.log(`커런트 타깃: ${e.currentTarget}`);
+    }, isCAPTURING);
+
+    $medium.addEventListener('click', e => {
+      console.log(`h 이벤트 단계: ${e.eventPhase}`);
+      console.log(`이벤트 타깃: ${e.target}`); 
+      console.log(`커런트 타깃: ${e.currentTarget}`);
+    });
+
+    $small.addEventListener('click', e => {
+      console.log(`i 이벤트 단계: ${e.eventPhase}`);
+      console.log(`이벤트 타깃: ${e.target}`); 
+      console.log(`커런트 타깃: ${e.currentTarget}`);
+    });
+    // */
+    // g 1
+    // i 2
+    // h 3
+
+    // d 1 
+    // g 1
+    // e 1
+    // f 2
+    // c 2
+    // i 2
+    // b 3
+    // h 3
+    // a 3
+  </script>
+</body>
+</html>
