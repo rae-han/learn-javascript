@@ -21,9 +21,15 @@
 
     const throttle = (callback, delay) => {
       let timerId;
+      let n = 0;
+      let t = 0;
+      
       return event => {
+        n++;
         if (timerId) return;
         timerId = setTimeout(() => {
+          t++;
+          console.log(n, t)
           callback(event);
           timerId = null;
         }, delay, event);
