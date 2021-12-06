@@ -34,14 +34,7 @@
     const $fruits = document.getElementById('fruits');
     const $msg = document.querySelector('.msg');
 
-    // 사용자 클릭에 의해 선택된 내비게이션 아이템(li 요소)에 active 클래스를 추가하고
-    // 그 외의 모든 내비게이션 아이템의 active 클래스를 제거한다.
     function activate({ target }) {
-      console.log(target.matches('#fruits > li'));
-      console.log(target.matches('li'));
-      console.dir(target);
-
-      // 이벤트를 발생시킨 요소(target)가 ul#fruits의 자식 요소가 아니라면 무시한다.
       if (!target.matches('#fruits > li')) return;
 
       [...$fruits.children].forEach($fruit => {
@@ -50,7 +43,6 @@
       });
     }
 
-    // 이벤트 위임: 상위 요소(ul#fruits)는 하위 요소의 이벤트를 캐치할 수 있다.
     $fruits.onclick = activate;
   </script>
 </body>
