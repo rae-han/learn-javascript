@@ -7,6 +7,35 @@
   <title>Document</title>
 </head>
 <body>
-  
+  <h1>Test Page</h1>
+
+  <script>
+    const xhr = new XMLHttpRequest();
+    console.log(1, xhr.readyState); // 0
+
+    xhr.open('GET', '/brands');
+    console.log(2, xhr.readyState); // 1
+
+    xhr.setRequestHeader('content-type', 'application/json');
+    xhr.send();
+    console.log(3, xhr.readyState); // 1
+
+    xhr.onreadystatechange = () => {
+      console.log(4, xhr.readyState);
+      if(xhr.readyState !== XMLHttpRequest.DONE) return;
+
+      if(xhr.status === 200) {
+        console.log(JSON.parse(xhr.response));
+      } else {
+        console.error('Error', xhr.statsu, xhr.statusText);
+      }
+    }
+
+    xhr.onload = () => {
+      if(xhr.status === 200) {
+        console.log(JSON.parse(xhr.response));
+      }
+    }
+  </script>
 </body>
 </html>

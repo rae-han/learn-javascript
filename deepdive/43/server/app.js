@@ -1,6 +1,11 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const path = require("path");
+
 const port = 3000
+
+app.use(cors());
 
 const brands = [
   { id: 1, name: 'time' }
@@ -10,7 +15,12 @@ app.get('/test', (req, res) => {
   res.send('Hello Test!')
 });
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
+  const client = path.join(__dirname, '../client/index.html');
+  res.sendFile(client);
+})
+
+app.get('/brands', function (req, res) {
   res.json(brands);
 });
 
