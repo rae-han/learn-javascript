@@ -17,6 +17,7 @@ app.get('/test', (req, res) => {
 
 app.get('/', (req, res) => {
   const client = path.join(__dirname, '../client/index.html');
+  console.log(client)
   res.sendFile(client);
 })
 

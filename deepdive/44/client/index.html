@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REST API</title>
+
+  <style>
+    form p {
+      display: flex;
+    }
+
+    form p .title {
+      font-weight: bold;
+      flex-basis: 100px;
+    }
+  </style>
+
+</head>
+<body>
+  <form id="APIForm">
+    <h1>REST API</h1>
+    <!-- <p><span class="title">method</span><input class="value" type="text" placeholder="get, post, patch, delete..."></p> -->
+    <p><span class="title">method</span><select name="" id="methods">
+      <option value="get">get</option>
+      <option value="post">post</option>
+      <option value="put">put</option>
+      <option value="delete">delete</option>
+    </select></p>
+    <p><span class="title">url</span><input class="value" type="text" value="/brand"></p>
+    <p><span class="title">payload</span><input class="value" type="text" placeholder="brand_name"></p>
+    <button type="submit" id="APIFormSubmit">submit</button>
+  </form>
+
+  <!-- libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const fetchData = async () => {
+      const configs = {
+        method: 'get',
+        url: '/brand'
+      }
+
+      const res = await axios(configs);
+      return res;
+    }
+
+    window.onload = async () => {
+      console.log(await fetchData());
+    }
+
+    const $submitBtn = document.querySelector('#APIFormSubmit');
+
+    $submitBtn.addEventListener('click', async function(e) {
+      e.preventDefault();
+
+      const methods = document.querySelector('#methods');
+      const { value: method } = methods;
+      const [{ value: url }, { value: payload }] = document.querySelectorAll('.value');
+      
+      console.log(url)
+      const configs = {
+        method,
+        url,
+        data: {
+          name: payload
+        }
+      }
+
+      const res = await axios(configs);
+      console.log(res);
+
+
+    })
+  </script>
+</body>
+</html>
