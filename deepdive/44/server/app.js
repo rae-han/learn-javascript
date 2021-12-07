@@ -23,24 +23,27 @@ try {
   console.log('파일 생성 완료!!')
 }
 
+const readJSON = filename => {
+  return JSON.parse(fs.readFileSync(`./${filename}.json`));
+}
+
 app.get('/test', (req, res) => {
   res.send('Hello Test!')
 });
 
 app.get('/', (req, res) => {
   const client = path.join(__dirname, '../client/index.html');
-  console.log(client)
   res.sendFile(client);
 })
 
 app.get('/brand', function (req, res) {
-  const brands = JSON.parse(fs.readFileSync('./brands.json'));
+  const brands = readJSON('brands');
   res.json(brands)
 });
 
 app.get('/brand/:id', function (req, res) {
   const { id } = req.params;
-  const brands = JSON.parse(fs.readFileSync('./brands.json'));
+  const brands = readJSON('brands');
   const brand = brands.filter(brand => brand.id == id);
   console.log(brand)
   res.json(brand)
@@ -48,7 +51,7 @@ app.get('/brand/:id', function (req, res) {
 
 app.post('/brand', function (req, res) {
   let { name } = req.body;
-  const brands = JSON.parse(fs.readFileSync('./brands.json'));
+  const brands = readJSON('brands');
   brands.push({ id: brands[brands.length-1].id+1 || 0, name });
   fs.writeFileSync('./brands.json', JSON.stringify(brands));
   res.json(123);
@@ -63,5 +66,5 @@ app.delete('/user', function (req, res) {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Example app listening at http://localhost:${port}`);
 });
