@@ -1,0 +1,78 @@
+<!-- https://alligator.io/web-components/attributes-properties/ -->
+<!-- + Lit LitElement with Google -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <custom-input name="123"></custom-input>
+
+  <div class="custom-div">
+    <h1>제목</h1>
+    <p>내용</p>
+  </div>
+
+  <custom-div></custom-div>
+  <custom-div></custom-div>
+  <custom-div></custom-div>
+
+  <script>
+    class CustomInput extends HTMLElement {
+      connectedCallback() {
+        // let name = this.getAttribute('name');
+
+        // let label = document.createElement('label');
+        // label.textContent = `this is label ${name}`;
+        // this.appendChild(label);
+
+        // let input = document.createElement('input');
+        // this.appendChild(input);
+
+        // let style = document.createElement('style');
+        // style.textContent = 'input { background: #f2f2f2; }'
+        // this.appendChild(style);
+        this.render();
+      }
+
+      render() {
+        let name = this.getAttribute('name');
+
+        let label = document.createElement('label');
+        label.textContent = `this is label ${name}`;
+        this.appendChild(label);
+
+        let input = document.createElement('input');
+        this.appendChild(input);
+
+        let style = document.createElement('style');
+        style.textContent = 'input { background: #f2f2f2; }'
+        this.appendChild(style);
+      }
+
+      static get observedAttributes() {
+        return ['name']; // attribute를 감시하고 바뀌면 아래 메소드를 실행
+      }
+
+      attributeChangeedCallback() {
+        console.log('change!'); // 일종의 hook
+        this.render();
+      }
+    }
+
+    class CustomDiv extends HTMLElement {
+      connectedCallback() {
+        let div = document.querySelector('.custom-div');
+        this.appendChild(div);
+      }
+    }
+
+    customElements.define('custom-input', CustomInput);
+    customElements.define('custom-div', CustomDiv);
+  </script>
+</body>
+</html>
