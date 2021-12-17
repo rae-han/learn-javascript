@@ -10,7 +10,9 @@
   <title>Document</title>
 </head>
 <body>
-  <custom-input name="123"></custom-input>
+  <div class="custom-input-list">
+
+  </div>
 
   <div class="custom-div">
     <h1>제목</h1>
@@ -73,6 +75,26 @@
 
     customElements.define('custom-input', CustomInput);
     customElements.define('custom-div', CustomDiv);
+
+    let $list = document.querySelector('.custom-input-list');
+    let $appendTest = document.createElement('div');
+    $appendTest.textContent = 'test';
+    $list.appendChild($appendTest);
+
+    const makeInputList = (values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) => {
+      let $list = document.querySelector('.custom-input-list');
+
+      let inputs = values.map(value => {
+        let input = document.createElement('custom-input');
+        input.setAttribute('name', value);
+        return input;
+      });
+
+      $list.append(...inputs);
+    }
+    makeInputList();
+
+    
   </script>
 </body>
 </html>
