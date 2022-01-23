@@ -8,10 +8,14 @@
 </head>
 <body>
   <h4>Chatting page</h4>
-  <button id="send">send message</button>
+  <button id="send" onclick="socket.send('hi')">send message</button>
 
   <script>
     let socket = new WebSocket("ws://localhost:8081");
+
+    socket.onmessage = function (event) {
+      console.log(event.data);
+    }
   </script>
 </body>
 </html>
