@@ -36,9 +36,29 @@ let printMessage = (func) => {
 };
 
 printMessage(printMessage1);
+// Hello
+// Noting to display 😜
+// Noting to display 😜
+// 0
+// 
 printMessage(printMessage2);
+// Hello
+// Noting to display!
+// Noting to display!
+// 0
+//
 printMessage(printMessage3);
+// Hello
+// Noting to display
+// null
+// 0
+//
 printMessage(printMessage4);
+// Hello
+// Noting to display!
+// Noting to display!
+// Noting to display!
+// Noting to display!
 
 
 // Object Destructuring
@@ -63,6 +83,7 @@ function displayPerson3(person) {
 }
 function displayPerson4({name, age} = person) {
   console.log(name, age)
+  console.log(person)
 }
 
 displayPerson1(person);
@@ -94,6 +115,7 @@ console.log(fruits)
 
 
 // Optional Chaining
+console.log(`# Optional Chaining #######################################`);
 
 const bob = {
   name: 'Julia',
