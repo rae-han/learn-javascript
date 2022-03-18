@@ -88,12 +88,75 @@ module.exports = {
  * 자바스크립트는 Array가 아닌다 Array같이 여겨지는 객체가 많다(유사배열)
  * 
  * 함수형은 함수에 맞게 데이터만 맞추면 데이터에 영향 받지 않고 사용 가능하다
+ * 
+ * 다형성을 높게 프로그래밍을 할수 있다
+ * 데이터가 먼저 나오는 프로그래밍보다 함수가 먼저 나오는 프로그래밍이
+ * 
+ * 객체 지향은 해당하는 객체가 생겨야 기능을 수행할수 있다
+ * 
+ * 함수는 함수가 먼저 존재하기 때문에, 데이터가 생기지 않더라도 평가 시점이 상대적으로 유연해진다
+ * 이 이유 덕분에 더 높은 조합성을 갖는다
  */
 
-const abc = {
-  "0": 0,
-  "1": 1,
-  "2": 2,
-  "3": 3,
+_map([1, 2, 3, 4], function(v) { return v })
+/**
+ * 여기서 두 번째 인자는 반드시 콜백 함수가 아니다
+ * 무조건 콜백 함수라는 명칭으로 부를때가 있는데 프레디케이트나 이터 맴퍼 등의 정확한 명칭을 쓴느게 좋다
+ */
+
+/**
+ * 2. 외부 다형성
+ * - array_like 값이 들어오거나 arguments 값이 들어오거나, document.querySelectorAll 값이 들어오거나 다 실행 가능
+ * - 돌림직한 모든 객체를 다 돌릴수 있또록 하는 것은 고차함수의 구조 맵이 어떻게 구현됐느냐에 따라 결정되지만
+ * - 순수 함수로 만들었고 어레이라이ㅡ면 다 돌릴수 있게 만든 기법은 맵 이치 필터가 담당하지만
+ * 
+ * 3. 내부 다형성
+ * - 배열안에 어떤 값이든 들어있어도 다 수행할수 있게 하는 것은 2번째 인자인 보조 함수가 하는 역할이다
+ * - 프레디 맵퍼 이터레이터
+ * - 내부 값에 대한 다형성은 보조함수가 책임을 지기 때문에
+ * - 넘기는 값과 그 값에 대한 이해로 숫자니까 더할 것이라던지 노드니까 노드 네임을 참조할 것이라던지 개발자가 정할 수 있기 때문에 
+ * - 보조 함수에 위임하기 때문에 데이터 형으로부터 자유롭고 다형성을 높이는데 유리하다
+ */
+
+/**
+ * 4. 커링 ( _curry, _curryr)
+ */
+
+function _curry(fn) {
+  return function(a) {
+    return function(b) {
+      return fn(a, b); // 미리 받은 함수 본체를 안쪽에서 평가
+    }
+  }
 }
-console.log(abc)
+
+const add1 = function(a, b) {
+  return a+b;
+}
+
+console.log(add1(5, 10));
+
+const add2 = _curry(function(a, b) {
+  return a+b;
+})
+
+const add5 = add2(5);
+console.log(add5(10));
+console.log(add2(10)(5));
+
+function _curry2(fn) {
+  return function(a, b) {
+    if(arguments.length === 2) return fn(a, b);
+
+    return function(b) {
+      return fn(a, b); // 미리 받은 함수 본체를 안쪽에서 평가
+    }
+  }
+}
+
+const add3 = _curry2(function(a, b) {
+  return a+b;
+})
+
+console.log(add3(10)(5))
+console.log(add3(10, 5))
