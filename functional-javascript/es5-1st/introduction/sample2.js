@@ -1,4 +1,4 @@
-const { _filter, _map } = require('./_');
+const { _filter, _map, _each, _get } = require('./_');
 
 let users = [
   { id: 1, name: 'ID', age: 36 },
@@ -103,6 +103,58 @@ let result = _map(
   _filter(users, 
     user => user.age > 30
   ),
-  user => user.name
+  // user => user.name // 001
+  _get('name') // 001 결국 같은 코드
 )
 console.log(result);
+
+// 002
+// _reduce 만들기
+/**
+ * 초기값 memo를 list 인자를 가지고 iter 함수를 재귀적으로 실행 시켜주는 것?
+ * 말 그대로 축약하는 함수
+ * 모든 데이터를 두번째 인자인 함수를 통해 축약 시켜서 새로운 데이터를 만드는 것
+ */
+
+let slice = Array.prototype.slice;
+function _rest(list, num) {
+  return slice.call(list, num || 1)
+}
+
+function _reduce(list, iter, memo) {
+  // 003
+  if(arguments.length == 2) {
+    console.log(list)
+    memo = list[0];
+    // list = list.slice(1); // slice는 Array 메서드기 때문에 list가 어레이일때만 사용 가능하다
+    // let slice = Array.prototype.slice;
+    // slice.call(list, 2); // 이렇게 하면 array like 객체에서도 사용 가능하다
+    // console.log(slice.call(a, 2).constructor);
+    list = _rest(list);
+  }
+
+  _each(list, function(val) {
+    memo = iter(memo, val)
+  })
+
+  return memo;
+}
+
+console.clear();
+console.log(_reduce([1, 2, 3, 4], (a, b) => a + b, 0));
+// 들어 있는 모든 값을 통해 값을 만들어 나가는 축약 된 
+// 리듀스 함수는 다양한 것을 할수 있고, 복잡하거나 어려운 로직을 단순하게 구현할수 있게 도와준다 
+// 데이터를 함수에 적용하겠다 라는 선언적인 코드만 있다
+// 그래서 코드가 정상적으로 작동할 것이고
+// 두번째 함수를 통해서 어떤 순서로 실행할지 정해져 있기 때문에
+// 미션이 단순하다
+
+// 세번째 인자를 생략하는 방법으로도 사용 가능하다
+// 003
+console.log(_reduce([1, 2, 3, 4], (a, b) => a + b));
+
+
+
+
+
+

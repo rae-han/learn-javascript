@@ -69,11 +69,6 @@ function _map(list, mapper) {
   return new_list;
 }
 
-module.exports = {
-  _filter,
-  _map,
-}
-
 /**
  * # 다형성
  * 자바스크립트에는 이미 Array 객체에 map, filter 함수가 있다
@@ -160,3 +155,78 @@ const add3 = _curry2(function(a, b) {
 
 console.log(add3(10)(5))
 console.log(add3(10, 5))
+
+function _curry3(fn) {
+  return function(a, b) {
+    return arguments.length === 2 ? fn(a, b) : function(b) {
+      return fn(a, b); // 미리 받은 함수 본체를 안쪽에서 평가
+    }
+  }
+}
+
+const add4 = _curry3(function(a, b) {
+  return a+b;
+})
+
+console.log(add4(10)(5))
+console.log(add4(10, 5))
+
+let sub1 = _curry3(function(a, b) {
+  return a - b;
+})
+
+console.log(sub1(10, 5))
+
+let sub10 = sub1(10);
+console.log(sub10(5)) 
+// 10 에 5를 빼는건데 5에서 10일 빼는 느낌의 함수 네임
+// 이때 쓰는게 curryr(curry right)
+
+function _curryr1(fn) {
+  return function(a, b) {
+    return arguments.length === 2 ? fn(a, b) : function(b) {
+      return fn(b, a); // 미리 받은 함수 본체를 안쪽에서 평가
+    }
+  }
+}
+
+let sub2 = _curryr1(function(a, b) {
+  return a - b;
+})
+
+let sub10_2 = sub2(10);
+console.log(sub10_2(5));
+
+/**
+ * _get
+ */
+
+function _get1(obj, key) {
+  return obj == null ? undefined : obj[key];
+}
+
+let user1 = { id: 1, name: 'NM', age: 31 };
+console.log(user1.name);
+console.log(_get1(user1, 'name'));
+// user1 값이 없다면 첫 번째는 에러, 두 번째는 undefined를 뱉는다
+
+let _get2 = _curryr1(function(obj, key) {
+  return obj === null ? undefined : obj[key];
+});
+/**
+ * _get 함수를 정의 할때 curryr를 통해 함수를 정의하게 되면 평가 순서를 커링을 통해 뒤짚어 인자를 오른쪽부터 적용할수 있게 사용할수 있게 된다
+ * _get2(user1, 'name') 보다 _get2('name', user1)이 더 직관적이다
+ */
+
+let get_name = _get2('name');
+console.log(get_name(user1)) // 이걸로 sample2.js // 001 수정
+
+
+module.exports = {
+  _filter,
+  _map,
+  _each,
+  _get: _get2,
+}
+
+// 여기서부터 그냥 002로 이동
