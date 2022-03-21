@@ -146,18 +146,18 @@ console.log(result1)
  */
 
 /**
- * 단순히 객체가 먼저 나오면 객체 지향 함수가 먼저 나오면 함수 지향 프로그래밍이다
- * 
- * person.moveLeft();
- * person.moveRight();
- * man.moveLeft();
- * man.moveRight();
- * -> 객체지향에서는 데이터를 먼저 디자인하고 그 데이터에 맞는 메서드를 만든다
- * 
- * moveLeft(person);
- * moveRight(person);
- * moveLeft(man);
- * moveRight({ x: 5, y: 2 });
- * -> 함수를 먼저 만들고, 그 함수에 맞게 데이터 세트를 구성한다
+단순히 객체가 먼저 나오면 객체 지향 함수가 먼저 나오면 함수 지향 프로그래밍이다
+
+person.moveLeft();
+person.moveRight();
+man.moveLeft();
+man.moveRight();
+-> 객체지향에서는 데이터를 먼저 디자인하고 그 데이터에 맞는 메서드를 만든다
+
+moveLeft(person);
+moveRight(person);
+moveLeft(man);
+moveRight({ x: 5, y: 2 });
+-> 함수를 먼저 만들고, 그 함수에 맞게 데이터 세트를 구성한다
  */
 
