@@ -221,6 +221,7 @@ let _get2 = _curryr1(function(obj, key) {
 let get_name = _get2('name');
 console.log(get_name(user1)) // 이걸로 sample2.js // 001 수정
 
+console.clear();
 
 module.exports = {
   _filter,

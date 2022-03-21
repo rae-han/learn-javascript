@@ -11,37 +11,37 @@ let users = [
   { id: 8, name: 'MP', age: 23 }
 ];
 
-// # 1. 명령형 코드
-// * 1. 30세 이상인 users를 거른다.
-let temp_users1 = [];
-for (let i = 0; i < users.length; i++) {
-  if (users[i].age >= 30) {
-    temp_users1.push(users[i]);
-  }
-}
+// // # 1. 명령형 코드
+// // * 1. 30세 이상인 users를 거른다.
+// let temp_users1 = [];
+// for (let i = 0; i < users.length; i++) {
+//   if (users[i].age >= 30) {
+//     temp_users1.push(users[i]);
+//   }
+// }
 // console.log(temp_users1);
 
-// * 2. 30세 이상인 users의 names를 수집한다.
-let names = [];
-for (let i = 0; i < temp_users1.length; i++) {
-  names.push(temp_users1[i].name);
-}
+// // * 2. 30세 이상인 users의 names를 수집한다.
+// let names = [];
+// for (let i = 0; i < temp_users1.length; i++) {
+//   names.push(temp_users1[i].name);
+// }
 // console.log(names);
 
-// * 3. 30세 미만인 users를 거른다.
-let temp_users2 = [];
-for (let i = 0; i < users.length; i++) {
-  if (users[i].age < 30) { // ! 1, 3 코드에서 중복을 줄이려고해도 이 부분을 없애는게 난해하다
-    temp_users2.push(users[i]);
-  }
-}
+// // * 3. 30세 미만인 users를 거른다.
+// let temp_users2 = [];
+// for (let i = 0; i < users.length; i++) {
+//   if (users[i].age < 30) { // ! 1, 3 코드에서 중복을 줄이려고해도 이 부분을 없애는게 난해하다
+//     temp_users2.push(users[i]);
+//   }
+// }
 // console.log(temp_users2);
 
-// * 4. 30세 미만인 users의 ages를 수집한다.
-let ages = [];
-for (let i = 0; i < temp_users2.length; i++) {
-  ages.push(temp_users2[i].age);
-}
+// // * 4. 30세 미만인 users의 ages를 수집한다.
+// let ages = [];
+// for (let i = 0; i < temp_users2.length; i++) {
+//   ages.push(temp_users2[i].age);
+// }
 // console.log(ages);
 
 // const _filter = (list, predi) => {
@@ -82,6 +82,29 @@ console.log(_filter([1, 2, 3, 4], num => !(num%2)));
 //   return new_list;
 // }
 
+// // 1. 30세 이상인 users를 거른다.
+// const over_30 = _filter(users, user => user.age >= 30);
+// console.log(over_30);
+
+// // 2. 30세 이상인 users의 names를 수집한다.
+// let names = [];
+// for (let i = 0; i < over_30.length; i++) {
+//   names.push(over_30[i].name);
+// }
+// console.log(names);
+
+// // 3. 30세 미만인 users를 거른다.
+// const under_30 = _filter(users, user => user.age < 30);
+// console.log(under_30);
+
+// // 4. 30세 미만인 users의 ages를 수집한다.
+// let ages = [];
+// for (let i = 0; i < under_30.length; i++) {
+//   ages.push(under_30[i].age);
+// }
+// console.log(ages);
+// console.log('############### 3')
+
 const over_30 = _filter(users, user => user.age >= 30);
 let over_30_names = _map(over_30, user => user.name);
 console.log(over_30_names);
@@ -90,7 +113,7 @@ const under_30 = _filter(users, user => user.age < 30);
 let under_30_ages = _map(under_30, user => user.age);
 console.log(under_30_ages);
 
-console.log(_map([1, 2, 3], num => num*2));
+// console.log(_map([1, 2, 3], num => num*2));
 
 /**
  * 함수형 프로그래밍에서는 대입문을 많이 사용하지 않는 성향이 있다
@@ -140,7 +163,7 @@ function _reduce(list, iter, memo) {
   return memo;
 }
 
-console.clear();
+// console.clear();
 console.log(_reduce([1, 2, 3, 4], (a, b) => a + b, 0));
 // 들어 있는 모든 값을 통해 값을 만들어 나가는 축약 된 
 // 리듀스 함수는 다양한 것을 할수 있고, 복잡하거나 어려운 로직을 단순하게 구현할수 있게 도와준다 
