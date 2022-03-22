@@ -221,6 +221,27 @@ let _get2 = _curryr1(function(obj, key) {
 let get_name = _get2('name');
 console.log(get_name(user1)) // 이걸로 sample2.js // 001 수정
 
+const _reduce = (...args) => {
+  let [list, iter, memo] = args;
+  // console.log(list, iter, memo)
+  // 003
+  if(memo == undefined) {
+    console.log(list)
+    memo = list[0];
+    // list = list.slice(1); // slice는 Array 메서드기 때문에 list가 어레이일때만 사용 가능하다
+    // let slice = Array.prototype.slice;
+    // slice.call(list, 2); // 이렇게 하면 array like 객체에서도 사용 가능하다
+    // console.log(slice.call(a, 2).constructor);
+    list = _rest(list);
+  }
+
+  _each(list, function(val) {
+    memo = iter(memo, val)
+  })
+
+  return memo;
+}
+
 console.clear();
 
 module.exports = {
@@ -228,6 +249,7 @@ module.exports = {
   _map,
   _each,
   _get: _get2,
+  _reduce,
 }
 
 // 여기서부터 그냥 002로 이동

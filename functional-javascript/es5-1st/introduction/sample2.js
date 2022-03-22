@@ -144,9 +144,30 @@ function _rest(list, num) {
   return slice.call(list, num || 1)
 }
 
-function _reduce(list, iter, memo) {
+// function _reduce(list, iter, memo) {
+//   // 003
+//   if(arguments.length == 2) {
+//     console.log(list)
+//     memo = list[0];
+//     // list = list.slice(1); // slice는 Array 메서드기 때문에 list가 어레이일때만 사용 가능하다
+//     // let slice = Array.prototype.slice;
+//     // slice.call(list, 2); // 이렇게 하면 array like 객체에서도 사용 가능하다
+//     // console.log(slice.call(a, 2).constructor);
+//     list = _rest(list);
+//   }
+
+//   _each(list, function(val) {
+//     memo = iter(memo, val)
+//   })
+
+//   return memo;
+// }
+
+const _reduce = (...args) => {
+  let [list, iter, memo] = args;
+  console.log(list, iter, memo)
   // 003
-  if(arguments.length == 2) {
+  if(memo == undefined) {
     console.log(list)
     memo = list[0];
     // list = list.slice(1); // slice는 Array 메서드기 때문에 list가 어레이일때만 사용 가능하다
@@ -163,8 +184,12 @@ function _reduce(list, iter, memo) {
   return memo;
 }
 
+console.log(123123123123)
 // console.clear();
-console.log(_reduce([1, 2, 3, 4], (a, b) => a + b, 0));
+console.log(_reduce([1, 2, 3, 4], (a, b) => {
+  console.log(a, b);
+  return a+b;
+}, 0));
 // 들어 있는 모든 값을 통해 값을 만들어 나가는 축약 된 
 // 리듀스 함수는 다양한 것을 할수 있고, 복잡하거나 어려운 로직을 단순하게 구현할수 있게 도와준다 
 // 데이터를 함수에 적용하겠다 라는 선언적인 코드만 있다
