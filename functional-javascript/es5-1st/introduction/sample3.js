@@ -6,20 +6,19 @@ const { _reduce } = require('./_')
 // 결국엔 reduce이다.
 // pipe가 좀 더 추상화 된 레벨이 pipe이고 pipe는 좀 더 특화된 함수이다.
 // 함수들 이라는 배열을 통해서 인자를 연속적으로 적용한 최종 결과로 축약
-function _pipe() {
-  const fns = arguments;
-  console.log(fns)
-  
-  return function(arg) {
-    return _reduce(fns, function(arg, fn) {
-      return fn(arg)
-    }, arg)
-  }
-}
+// function _pipe() {
+//   const fns = arguments;
+//   console.log(fns)
 
-// const _pipe = () => {
-
+//   return function(arg) {
+//     return _reduce(fns, function(arg, fn) {
+//       console.log(fn)
+//       return fn(arg)
+//     }, arg)
+//   }
 // }
+
+const _pipe = (...fns) => arg => _reduce(fns, (arg, fn) => fn(arg), arg)
 
 const fn = _pipe(
   n => n + 1,
