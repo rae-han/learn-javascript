@@ -159,6 +159,20 @@ _go(
 
 _go(
   users,
+  users => _filter(users, user => user.age >= 30),
+  users => _map(users, _get('name')),
+  console.log,
+)
+
+_go(
+  users,
+  users => _filter(users, user => user.age < 30),
+  users => _map(users, _get('age')),
+  console.log,
+)
+
+_go(
+  users,
   _filter((user) => user.age >= 30),
   _map(_get('name')),
   console.log,
@@ -173,67 +187,9 @@ _go(
 
 // _pipe와 _go 함수를 사용하면 기존의 함수를 중첩 하는 것보다 훨씬 명시적으로 코드를 읽어 나갈수 있다.
 
-// 커리와 파이프 함수가 필터 맵 함수를 만들때 커리알을 이용해서 만들었고
+// 커리와 파이프 / 함수가 필터 맵 함수를 만들때 커리알을 이용해서 만들었고
 // 그로 인해 그 함수가 인자를 하나, 함수 하나만 넘겼을 때 인자가 오른쪽부터 적용된 또 다른 함수를 리턴하게 되고
 // 고라는 함수로 인자와 함수들을 받아서 함수를 연속적으로 실행 시키면서 인자를 변화시키면서 함수형 프로그래밍
 // 함수의 평가시점이나 함수가 인자에 적용 되 가는 과정에서 사이드 이펙트가 없는 순수 함수들로 구성될 때 이런 조합성을 만들수 있다
 
 // 순수 함수의 평가 시점을 다루면서 조합성을 다루면서 추상화의 단위를 함수로 하는 프로그래밍
-
-
-
-
-// const sampleList = [
-//   { id: 1, data: 'sample1' },
-//   { id: 2, data: 'sample2' },
-//   { id: 3, data: 'sample3' },
-//   { id: 4, data: 'sample4' },
-// ]
-
-// const _each = (list, iteratee) => {
-// 	for(let i = 0; i < list.length; i++) {
-// 		iteratee(list[i]);
-// 	}
-// }
-
-// const _filter = (list, predicate) => {
-// 	let new_list = [];
-
-// 	_each(list, value => {
-// 		if(predicate(value)) {
-// 			new_list.push(value)
-// 		}
-// 	});
-// }
-
-// const _map = (list, mapper) => {
-//   let new_list = [];
-
-//   _each(list, value => {
-// 		new_list.push(mapper(value));
-// 	})
-
-//   return new_list;
-// }
-
-// const _reduce = (list, iter, memo) => {
-//   if(memo == undefined) {
-//     memo = list[0];
-//     list = _rest(list);
-//   }
-
-//   _each(list, function(val) {
-//     memo = iter(memo, val)
-//   })
-
-//   return memo;
-// }
-
-// const _pipe = (...fns) => arg => _reduce(fns, (arg, fn) => fn(arg), arg);
-
-// const fn = _pipe(
-//   _filter,
-//   _map,
-// )
-
-// fn(sampleList);

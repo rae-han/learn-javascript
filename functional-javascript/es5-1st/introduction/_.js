@@ -8,14 +8,33 @@ let users = [
   { id: 7, name: 'JI', age: 31 },
   { id: 8, name: 'MP', age: 23 }
 ];
+let _curryr = fn => (a, b) => b !== undefined ? fn(a, b) : (b => fn(b, a));
+let _get = _curryr((obj, key) => obj === null ? undefined : obj[key]);
 
-const _each = (list, iteratee) => {
-	for(let i = 0; i < list.length; i++) {
-		iteratee(list[i]);
+// a
+let _length = _get('length')
+// let _each = (list, iteratee) => {
+// 	// for(let i = 0; i < list.length; i++) {
+// 	for(let i = 0, len = _length(list); i < len; i++) {
+// 		iteratee(list[i]);
+// 	}
+// }
+
+function _is_object(obj) {
+  return typeof obj == 'object' && !!obj;
+}
+function _keys(obj) {
+  return _is_object(obj) ? Object.keys(obj) : [];
+}
+
+let _each = (list, iteratee) => {
+	let keys = _keys(list) // keys 자체는 null 값이 와도 빈 배열을 뱉도록 준비돼 있다. 무조건 올바른 배열이 리턴되므로 length를 사용할 수 있다.
+	for(let i = 0, len = keys.length; i < len; i++) {
+		iteratee(list[keys[i]]);
 	}
 }
 
-const _curryr = fn => (a, b) => b !== undefined ? fn(a, b) : (b => fn(b, a));
+
 // function _curryr(fn) {
 //   return function(a, b) {
 //     return arguments.length === 2 ? fn(a, b) : function(b) {
@@ -23,7 +42,7 @@ const _curryr = fn => (a, b) => b !== undefined ? fn(a, b) : (b => fn(b, a));
 //     }
 //   }
 // }
-// const _curryr = fn => {
+// let _curryr = fn => {
 //   return (a, b) => {
 //     console.log(1111)
 //     console.log(a, b)
@@ -76,11 +95,11 @@ let _map = (list, mapper) => {
 // }
 _map = _curryr(_map);
 
-const _log_length = value => {
+let _log_length = value => {
 	return value;
 }
 
-const _curry = (fn) => (a, b) => arguments.length === 2 ? fn(a, b) : b => fn(a, b);
+let _curry = (fn) => (a, b) => arguments.length === 2 ? fn(a, b) : b => fn(a, b);
 // function _curry(fn) {
 //   return function(a) {
 //     return function(b) {
@@ -88,19 +107,19 @@ const _curry = (fn) => (a, b) => arguments.length === 2 ? fn(a, b) : b => fn(a, 
 //     }
 //   }
 // }
-// const _curryr = fn => (a, b) => arguments.length === 2 ? fn(a, b) : b => fn(b, a);
+// let _curryr = fn => (a, b) => arguments.length === 2 ? fn(a, b) : b => fn(b, a);
 
 // let _get = (obj, key) => obj === null ? undefined : obj[key];
-const _get = _curryr((obj, key) => obj === null ? undefined : obj[key]);;
 
-// const _reduce = (list, iteratee, memo) => {
+
+// let _reduce = (list, iteratee, memo) => {
 // 	_each(list, value => {
 // 		memo = iteratee(memo, value)
 // 	})
 
 // 	return memo;
 // }
-const _reduce = (list, iter, memo) => {
+let _reduce = (list, iter, memo) => {
   // 003
   if(memo == undefined) {
     console.log(list)
@@ -108,7 +127,7 @@ const _reduce = (list, iter, memo) => {
     // list = list.slice(1); // slice는 Array 메서드기 때문에 list가 어레이일때만 사용 가능하다
     // let slice = Array.prototype.slice;
     // slice.call(list, 2); // 이렇게 하면 array like 객체에서도 사용 가능하다
-    // console.log(slice.call(a, 2).constructor);
+    // console.log(slice.call(a, 2).letructor);
     list = _rest(list);
   }
 
@@ -124,6 +143,9 @@ function _rest(list, num) {
   return slice.call(list, num || 1)
 }
 
+let _pipe = (...fns) => arg => _reduce(fns, (arg, fn) => fn(arg), arg);
+let _go = (arg, ...fns) => _pipe(...fns)(arg);
+
 module.exports = {
   users,
   _filter,
@@ -135,6 +157,8 @@ module.exports = {
   _log_length,
   _curry,
   _curryr,
+  _pipe,
+  _go,
 }
 
 // 여기서부터 그냥 002로 이동
