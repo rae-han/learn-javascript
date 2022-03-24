@@ -28,11 +28,14 @@ const fn = _pipe(
 
 console.log(fn(1));
 
+const fns = _pipe(
+  data
+)
+
 // _go
 // 즉시 실행되는 pipe 함수
 // pipe 는 함수를 리턴하는 함수
 // go는 첫번째 값을 인자로 두번째 값부터 함수를 받아서 즉시 실행시키는 함수
-
 
 // function _go(arg) {
 //   let fns = _rest(arguments);
