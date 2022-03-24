@@ -28,9 +28,29 @@ const fn = _pipe(
 
 console.log(fn(1));
 
-const fns = _pipe(
-  data
-)
+_pipe(
+  users => _filter(users, user => user.age >= 30),
+  users => _map(users, _get('name')),
+  console.log,
+)(users)
+_pipe(
+  users => _filter(users, user => user.age < 30),
+  users => _map(users, _get('age')),
+  console.log,
+)(users)
+
+// _go(
+//   users,
+//   _filter((user) => user.age >= 30),
+//   _map(_get('name')),
+//   console.log,
+// )
+// _go(
+//   users,
+//   _filter((user) => user.age < 30),
+//   _map(_get('age')),
+//   console.log,
+// )
 
 // _go
 // 즉시 실행되는 pipe 함수
@@ -42,9 +62,10 @@ const fns = _pipe(
 //   // pipeline을 만들 때,
 //   // pipeline은 인자 들로 함수를 받기 때문에 aplly를 통해 인자를 받는다.
 //   return _pipe.apply(null, fns)(arg);
+//   // return _pipe(...fns)(arg);
 // }
 
-const _go = (arg, ...fns) => _pipe.apply(null, fns)(arg);
+const _go = (arg, ...fns) => _pipe(...fns)(arg);
 
 _go(
   1,
