@@ -203,3 +203,11 @@ moveRight({ x: 5, y: 2 });
     - 좋아지는 분산 / 리액티브 환경
     - 동시성 + 병렬성 관련 기술
     - 함수형 프로그래밍 기술
+
+1. `filter` 함수는 인자로 `list`와 `predicate` 함수를 받는다. 
+2. 루프를 돌며 `list`의 i번째 값을 `predicate`에 넘겨준다.
+3. `predicate` 함수는 `list.length` 만큼 실행되며, 결과가 참일 때만 `new_list.push` 를 실행한다.
+    - `new_list.push`가 실행될지 여부를 `predicate` 함수에 완전히 위임했다.
+    - `_filter` 함수는 `predicate` 함수 내부에서 어떤 일을 하는지 모른다.
+    - 오직 `predicate` 함수의 결과에만 의존한다.
+4. 마지막에 `new_list를` 리턴한다.
