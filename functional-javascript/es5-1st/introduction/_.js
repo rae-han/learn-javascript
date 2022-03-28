@@ -20,6 +20,7 @@ let _length = _get('length')
 // 	}
 // }
 
+// b
 function _is_object(obj) {
   return typeof obj == 'object' && !!obj;
 }
@@ -160,6 +161,4 @@ module.exports = {
   _pipe,
   _go,
 }
-
 // 여기서부터 그냥 002로 이동
-
