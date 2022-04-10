@@ -1,4 +1,4 @@
-let { _each, _keys, _map, _get, _filter, _curryr, _reduce, _go } = require('./_')
+let { _each, _keys, _map, _get, _filter, _curryr, _reduce, _pipe, _go } = require('./_')
 // 컬렉션 중심 프로그래밍
 // 배열이나 돌림직한 것들을 컬렉션이라한다.
 // 컬렉션 중심 프로그래밍은 함수형에서 더 빛을 발한다.
@@ -435,14 +435,108 @@ function _push(obj, key, val) {
 // 위 코드를 쓰면 더 간결해진다.
 // 왜 더 간결해지나면 두번의 사용을 위해서 변수에 담아두는 일을 하는데
 // 함수를 쪼개서 만들게 되면 변수 선언이 줄어드게 되는 경향을 보이다.
+// 
 
 function _group_by(data, iter) {
   return _reduce(data, function(grouped, val) {
     return _push(grouped, iter(val), val)
   }, {});
 };
+// 함수 실행의 연속을 통해서 로직을 만들어 나가는게 보인다.
+// 함수를 통해 어던 값을 통해 그룹핑을 할 것인가 위임을 하게 된다.
+_go(
+  users,
+  _group_by(function(user) { return user.age - user.age % 10 }), // 몇대인지 변형된 함수를 줘서 
+  console.log,
+)
+
+_go(
+  users,
+  _group_by(function(user) { return user.name[0] }), // 
+  console.log,
+)
+// 위 코드는 함수형 적인 아이디어로 아래와 같이 바꿀순 있다. 필수는 아니다.
+var _head = function(list) {
+  return list[0]
+};
+
+_go(
+  users,
+  _group_by(_pipe(_get('name'), _head)),
+  console.log,
+)
+// 이런 식으로 작은 로직도 함수의 연속 실해응ㄹ 통해서 만들어 간다.
+
+// count_by
+// 그룹 바이와 비슷하지만 이터레이티로 만들어낸 키가 몇개가 있는지 만드는 함수
+// push등의 행위를 할 필요가 없으므로 더 간결하다
+
+// function _count_by(data, iter) {
+//   return _reduce(data, function(count, val) {
+//     var key = iter(val);
+//     // count[ket] = count[key] ? count[key]++ : 1;
+//     count[key] ? count[key]++ : count[key] = 1;
+//     return count;
+//   }, {})
+// }
+var _count_by = _curryr(_count_by);
+
+console.log(
+  _count_by(users, function(user) {
+    return user.age - user.age%10;
+  })
+);
+
+// 위의 _push와 같은 성격의 함수
+function _inc(count, key) {
+  count[key] ? count[key]++ : count[key] = 1;
+  return count;
+}
+
+function _count_by(data, iter) {
+  return _reduce(data, function(count, val) {
+    return _inc(count, iter(val))
+  }, {})
+}
+
+// each, map 함수를 조금 거친다.
+// #11, #12
+// 고치는 이유는 키 벨류 쌍을 한번에 볼수 있게 하기 위하여
+_map([1, 2, 3], console.log);
+_map(users[0], console.log);
+
+console.log(
+  _map(users[0], function(val, key) {
+    return [key, val];
+  })
+)
+
+// var _pairs = _map(function(val, key) {
+//   return [key, val];
+// })
+var _pairs = _map((val, key) => [key, val]);
+
+console.log(_pairs(users[0]))
 
 
+// 바로 실행 시키려면 _go함수 사용해본다 그리고 앞에 인자를 받아서..
+// pipe는 저 어래 2개 실행시키기 위해서 바꿔준 것
+var f1 = _pipe(
+  _count_by(function(user) { return user.age - user.age % 10; }),
+  _map((count, key) => `<li>${key}대는 ${count}명 입니다.</li>`),
+  list => '<ul>' + list.join('') + '</ul>',
+  // document.write); // this가 있어야 동작한다 이거 동작 안한다
+  // document.write(html)
+  // document.write.bind(document)
+  // html => document.wirte(html)
+  );
+
+_go(users, _reject(user => user.age < 20), f1); // f1 함수 내부에서 첫번째 줄에 필터링을 해도 된다.
+_go(users, _filter(user => user.age < 20), f1);
+
+console.log('#20')
+var f2 = _pipe(_reject(user => user.age < 20), f1);
+console.log(f2(users));
 
 
 

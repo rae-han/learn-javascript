@@ -31,7 +31,8 @@ function _keys(obj) {
 let _each = (list, iteratee) => {
 	let keys = _keys(list) // keys 자체는 null 값이 와도 빈 배열을 뱉도록 준비돼 있다. 무조건 올바른 배열이 리턴되므로 length를 사용할 수 있다.
 	for(let i = 0, len = keys.length; i < len; i++) {
-		iteratee(list[keys[i]]);
+		// iteratee(list[keys[i]]);
+		iteratee(list[keys[i]], keys[i]); // #11 key 혹은 i값도 넘겨 준다.
 	}
 }
 
@@ -79,8 +80,8 @@ _filter = _curryr(_filter);
 let _map = (list, mapper) => {
   let new_list = [];
 
-  _each(list, value => {
-		new_list.push(mapper(value));
+  _each(list, (value, key) => {
+		new_list.push(mapper(value, key)); // #12
 	})
 
   return new_list;
