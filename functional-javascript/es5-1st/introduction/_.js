@@ -123,7 +123,7 @@ let _curry = (fn) => (a, b) => arguments.length === 2 ? fn(a, b) : b => fn(a, b)
 let _reduce = (list, iter, memo) => {
   // 003
   if(memo == undefined) {
-    console.log(list)
+    // console.log(list)
     memo = list[0];
     // list = list.slice(1); // slice는 Array 메서드기 때문에 list가 어레이일때만 사용 가능하다
     // let slice = Array.prototype.slice;
@@ -152,6 +152,7 @@ module.exports = {
   _filter,
   _map,
   _each,
+  _keys,
   _get,
   _reduce,
   _rest,
