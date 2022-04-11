@@ -3,6 +3,7 @@
 [함수형 자바스크립트(Functional Javascript)](https://raehan.notion.site/Functional-JS-aa6206b5d29e4c9ab6ba6e3c0597af71)
 
 [함수형 자바스크립트(Functional Javascript)][fxjs_link]
+
 [fxjs_link]: https://raehan.notion.site/Functional-JS-aa6206b5d29e4c9ab6ba6e3c0597af71
 
 [함수형 자바스크립트(Functional Javascript)](https://raehan.notion.site/Functional-JS-aa6206b5d29e4c9ab6ba6e3c0597af71, "funtional js")
