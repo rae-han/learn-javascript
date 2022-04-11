@@ -33,15 +33,14 @@ let users = [
 
 // function _values(data) {
 //   return _map(data, function(val) { 
-//     console.log(val);
 //     return val; 
 //   });
 // }
 var _values = _map(_identity);
-console.log(users[0]);
-console.log(_keys(users[0]));
+console.log(11, _keys(users[0]));
 // _each 함수를 돌 때 키 값을 사용해서 돌도록 만든 함수
-console.log(_values(users[0]));
+console.log(1, _values(users));
+console.log(2, _values(users[0]));
 _each(users[0], console.log)
 
 // values는 재밌는 함수인 아이덴티티를 합성해서 함수를 만들수 있다.
@@ -71,6 +70,7 @@ console.log(_map(_identity)(users[0]));
 // var _values = _map(_identity); // 호이스팅 안되서 위로 올렸음.
 // _identity를 통해서 위와 같이 사용 가능하다.
 
+
 // 2. pluck
 // pluck 는 배열 내부에 있는 개체의 특정 키의 값들을 수집하는 함수이다.
 // 외부의 값을 수집한다? map
@@ -80,7 +80,9 @@ console.log(_map(_identity)(users[0]));
 //   })
 // };
 
-console.log(_pluck(users, 'age'))
+console.clear();
+console.log('######## ######## ######## ########  ######## ######## ######## ########')
+console.log(22, _pluck(users, 'age'))
 // 플럭크를 사용하면 간결하게 값들을 수집할 수 있다.
 
 // get 함수를 통해 간결하게 만들 수 있다.
@@ -99,11 +101,11 @@ console.log(_filter(users, function(user) {
   return !(user.age > 30);
 }))
 
-// function _reject(data, predi) {
-//   return _filter(data, function(val) {
-//     return !predi(val);
-//   })
-// }
+function _reject(data, predi) {
+  return _filter(data, function(val) {
+    return !predi(val);
+  })
+}
 
 console.log(_reject(users, function(user) {
   return user.age > 30;
@@ -142,6 +144,9 @@ var _compact = _filter(_identity); // identity 함수 자체가 값을 나타내
 // 다양하고 서로 다른 함수들을 셋하면 유리하다
 // 굉장이 큰 하나의 클래스를 만드는 것보다 여러개의 함수를 만드는 것이 함수형 프로그래밍 스럽다
 
+console.clear();
+console.log('######## ######## ######## ########  ######## ######## ######## ########')
+
 console.log(_compact([0, 1, 2, null, false, {}]))
 
 
@@ -174,6 +179,9 @@ console.log(_find(users, function(user) {
 console.log(_find(users, function(user) {
   return user.id === 30;
 }));
+
+console.clear();
+console.log('######## ######## ######## ########  ######## ######## ######## ########')
 
 function _find_index(list, predi) {
   var keys = _keys(list);
@@ -239,15 +247,18 @@ _go(
 //   return _find_index(data, _negate(predi)) === -1; 
 // }
 
-var testcase1 = [1, 2, 4, 6, 8, 9, 11, 17, 19];
+// var testcase1 = [1, 2, 4, 6, 8, 9, 11, 17, 19];
 
-console.log(_some(testcase1, function(val) {
-  return val === 11;
-}))
+// console.log(_some(testcase1, function(val) {
+//   return val === 11;
+// }))
 
-console.log(_every(testcase1, function(val) {
-  return val < 20;
-}))
+// console.log(_every(testcase1, function(val) {
+//   return val < 20;
+// }))
+
+console.clear();
+console.log('######## ######## ######## ########  ######## ######## ######## ########')
 
 console.log('#### 2')
 // some과 every는 predicate가 생갹 되도 동작해야한다.
@@ -296,6 +307,9 @@ console.log(
 // 파인드 익덱스는 보조함수를 받아서 그 함수 상황을 만족하는 값이 있는지 없는지 있다면 몇번째인지 찾을수 있기 때문에
 // 앞에 있는 고차 함수를 고르고 보조함수를 래핑하면서 프로그래밍 하는 것이 내가 로직을 고르는 것과 같다. 로직을 조합해 나가면서 프로그래밍 해나가는 것이다.
 // 모두 그런지, 하나라도 그런지를 고차함수로 선택하고, 그러하느냐가 무엇인지를 보조함수로 선택하는 것이 함수형 프로그래밍이다.
+
+console.clear();
+console.log('######## ######## ######## ########  ######## ######## ######## ########')
 
 // reduce 접기 or 축약
 // 리듀스는 함수형 프로그래밍에서 굉장히 상징적인 함수이다
@@ -421,6 +435,9 @@ _go(
   console.log,
 )
 
+console.clear();
+console.log('######## ######## ######## ########  ######## ######## ######## ########')
+
 // 그룹 바이 함수 안의 리듀스 안에 구현된 코드를 모듈화 하면 좋다.
 // 왜냐면 저 로직 자체로 의미가 있기 때문이다.
 // 객체와 키를 넣고 그 키로 찾아진 값이 있으면 그 곳에 푸쉬를 하고 그게 아니면 빈 어레이를 만들어서 푸쉬를 하는
@@ -538,27 +555,27 @@ console.log('#20')
 var f2 = _pipe(_reject(user => user.age < 20), f1);
 console.log(f2(users));
 
-module.exports = {
-  _values,
-  _pluck,
-  _negate,
-  _reject,
-  _compact,
-  _find,
-  _find_index,
-  _some,
-  _every,
-  _min,
-  _max,
-  _min_by,
-  _max_by,
-  _group_by,
-  _push,
-  _head,
-  _count_by,
-  _inc,
-  _pairs,
-}
+// module.exports = {
+//   _values,
+//   _pluck,
+//   _negate,
+//   _reject,
+//   _compact,
+//   _find,
+//   _find_index,
+//   _some,
+//   _every,
+//   _min,
+//   _max,
+//   _min_by,
+//   _max_by,
+//   _group_by,
+//   _push,
+//   _head,
+//   _count_by,
+//   _inc,
+//   _pairs,
+// }
 
 
 
