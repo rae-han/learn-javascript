@@ -148,6 +148,28 @@ function _rest(list, num) {
 let _pipe = (...fns) => arg => _reduce(fns, (arg, fn) => fn(arg), arg);
 let _go = (arg, ...fns) => _pipe(...fns)(arg);
 
+var {
+  _values,
+  _pluck,
+  _negate,
+  _reject,
+  _compact,
+  _find,
+  _find_index,
+  _some,
+  _every,
+  _min,
+  _max,
+  _min_by,
+  _max_by,
+  _group_by,
+  _push,
+  _head,
+  _count_by,
+  _inc,
+  _pairs,
+} = require('./sample5.js')
+
 module.exports = {
   users,
   _filter,
@@ -162,5 +184,25 @@ module.exports = {
   _curryr,
   _pipe,
   _go,
+  //
+  _values,
+  _pluck,
+  _negate,
+  _reject,
+  _compact,
+  _find,
+  _find_index,
+  _some,
+  _every,
+  _min,
+  _max,
+  _min_by,
+  _max_by,
+  _group_by,
+  _push,
+  _head,
+  _count_by,
+  _inc,
+  _pairs,
 }
 // 여기서부터 그냥 002로 이동

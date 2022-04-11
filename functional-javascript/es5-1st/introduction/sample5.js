@@ -538,6 +538,28 @@ console.log('#20')
 var f2 = _pipe(_reject(user => user.age < 20), f1);
 console.log(f2(users));
 
+module.exports = {
+  _values,
+  _pluck,
+  _negate,
+  _reject,
+  _compact,
+  _find,
+  _find_index,
+  _some,
+  _every,
+  _min,
+  _max,
+  _min_by,
+  _max_by,
+  _group_by,
+  _push,
+  _head,
+  _count_by,
+  _inc,
+  _pairs,
+}
+
 
 
 
