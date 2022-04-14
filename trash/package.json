@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "immer": "^9.0.12",
+    "redux": "^4.1.2"
+  }
+}
