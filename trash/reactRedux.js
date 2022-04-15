@@ -127,7 +127,8 @@ const sampleObject = {
 };
 
 
-// const newSampleObject1 = produce(sampleObject, draft => {
-//   draft.data.newData = 'this is new data';
-// });
-// console.log(newSampleObject1);
+const newSampleObject1 = produce(sampleObject, draft => {
+  draft.data.newData = 'this is new data';
+});
+console.log(sampleObject)
+console.log(newSampleObject1);
