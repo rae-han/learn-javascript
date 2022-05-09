@@ -268,3 +268,155 @@ _.go(
   },
   log('4 - a')
 );
+
+// ! 위 코드에서는 어떤 작업을 할때마다 모든 데이터를 순회한다.
+// # 5 users + posts + comments (index_by와 group_by로 효율 높이기)
+
+// const comments_with_users = _.map(comments, function(comment) {
+//   return _.extend({
+//     user: _.find(users, function(user) {
+//       return user.id == comment.user_id;
+//     })
+//   },  comment);
+// })
+// console.log(comments_with_users);
+// - 이 코드는 코맨트에 유저를 붙일 때 유저를 계속 돌게 된다.
+
+// function find_user_by_id(user_id) {
+//   return _.find(users, function(user) {
+//     return user.id == user_id;
+//   });
+// }
+// const comments_with_users = _.map(comments, function(comment) {
+//   return _.extend({
+//     user: find_user_by_id(comment.user_id)
+//   },  comment);
+// })
+// console.log(comments_with_users);
+// - 함수로 빼기만 했다.
+
+// - index_by 함수를 이용한다.
+// 어떤 키 값을 기준으로 인덱싱을 할지 정하고 데이터를 변경해준다.
+const user_by_id = _.index_by(users, 'id');
+function find_user_by_id(user_id) {
+  return user_by_id[user_id];
+}
+
+const comments_with_users = _.map(
+  comments,
+  function(comment) {
+    return _.extend({
+      user: find_user_by_id(comment.user_id)
+    }, comment);
+  }
+)
+console.log(comments_with_users)
+
+const posts_with_users = _.map(posts, function(post) {
+  return _.extend({
+    user: find_user_by_id(post.user_id)
+  }, post)
+});
+console.log(posts_with_users)
+
+// const posts_with_comments_user = _.map(
+//   posts,
+//   function(post) {
+//     return _.extend({
+//       comments: _.filter(comments_with_users, function(comment) {
+//         return comment.post_id == post.id;
+//       }),
+//       user: find_user_by_id(post.user_id),
+//     }, post)
+//   }
+// )
+// console.log(posts_with_comments_user)
+// - 여기서도 포스트의 크기 x 코맨트의 크기 만큼의 반복이 일어나는데 인덱싱을 미리 하면 좀 더 효율적으로 코드를 구현할 수 있다.
+
+// - 하나의 포스트에 유저는 한명이지만, 코맨트는 여러개일수 있다.
+// index_by 대신 group_by를 사용한다.
+const comments_with_users_by_posts = _go(
+  comments,
+  _.map(function(comment) {
+      return _.extend({
+        user: find_user_by_id(comment.user_id)
+      }, comment);
+    }
+  ),
+  _.group_by('post_id')
+)
+console.log(comments_with_users_by_posts);
+
+const posts_with_comments_user = _.map(
+  posts,
+  function(post) {
+    return _.extend({
+      comments: comments_with_users_by_posts[post.id],
+      user: find_user_by_id(post.user_id),
+    }, post)
+  }
+)
+console.log(posts_with_comments_user)
+
+// const users_with_posts = _.map(user_by_id, function(user) {
+//   return _.extend({
+//     posts: _.filter(posts_with_comments_user, function(post) {
+//       return post.user_id == user.id;
+//     })
+//   }, user)
+// })
+
+console.log(users_with_posts)
+
+var posts_with_comments_user_by_id = _.group_by(posts_with_comments_user, 'user_id');
+console.log(posts_with_comments_user_by_id);
+
+var users_with_posts = _.map(user_by_id, function(user) {
+  return _.extend({
+    posts: posts_with_comments_user_by_id[user.id] || []
+  }, user);
+});
+console.log(users_with_posts)
+
+// 5.1. 특정인의 posts의 모든 comments 거르기
+var user = users_with_posts[0];
+
+_.go(user.posts,
+  _.pluck('comments'),
+  _.flatten,
+  console.log);
+
+console.log(_.deep_pluck(user, 'posts.comments'));
+
+// 5.2. 특정인의 posts에 comments를 단 친구의 이름들 뽑기
+_.go(user.posts,
+  _.pluck('comments'),
+  _.flatten,
+  _.pluck('user'),
+  _.pluck('name'),
+  _.uniq,
+  console.log);
+
+_.go(user, _.deep_pluck('posts.comments.user.name'), _.uniq, console.log);
+
+// 5.3. 특정인의 posts에 comments를 단 친구들 카운트 정보
+
+_.go(user.posts,
+  _.pluck('comments'),
+  _.flatten,
+  _.pluck('user'),
+  _.pluck('name'),
+  _.count_by,
+  console.log);
+
+_.go(user, _.deep_pluck('posts.comments.user.name'), _.count_by, console.log);
+
+// 5.4. 특정인이 comment를 단 posts 거르기
+
+console.log(
+  _.filter(posts_with_comments_user, function(post) {
+    return _.find(post.comments, function(comment) {
+      return comment.user_id == 105;
+    })
+  })
+);
