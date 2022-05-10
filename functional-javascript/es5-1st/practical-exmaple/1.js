@@ -50,8 +50,6 @@ const comments = [
   { id: 310, body: '댓글10', user_id: 105, post_id: 201 }
 ];
 
-
-
 // # 1. 특정인이 쓴 post의 모든 comment 거르기()
 const userId_10 = _.filter(posts, function(post) {
   return post.user_id == 101;
