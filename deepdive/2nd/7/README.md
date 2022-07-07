@@ -2,7 +2,7 @@
 
 # 7.1. 산술 연산자
 
-산술 연산자는 피연산자를 대상으로 수학적 계산을 수행해 새로운 숫자 값을 만든다. 산술 연산이 불가능할 경우, NaN을 반환한다. 산술 연산자는 피연산자의 개수에 따라 이항 산술 연산자와 단항 산술 연산자로 구분할 수 있다.
+산술 연산자는 피연산자를 대상으로 수학적 계산을 수행해 새로운 숫자 값을 만든다. 산술 연산이 불가능할 경우, `NaN`을 반환한다. 산술 연산자는 피연산자의 개수에 따라 이항 산술 연산자와 단항 산술 연산자로 구분할 수 있다.
 
 ## 7.1.1. 이항 산술 연산자
 
@@ -41,6 +41,7 @@
 1 + false // 1
 1 + null // 1
 1 + undefined // NaN
+1 + '' // "1" but bad...
 ```
 
 # 7.2. 할당 연산자
@@ -54,8 +55,8 @@ let a, b, c;
 a = b = c = 0; // 연쇄 할당
 
 function func() {
-	let result = 0;
-	return result = 1 + 2;
+  let result = 0;
+  return result = 1 + 2;
 }
 
 console.log(func()); // 3
@@ -185,7 +186,7 @@ console.log(false || 'here');
 
 ```jsx
 1.toString() // Uncaught SyntaxError: Invalid or unexpected token
-(1).toString(); // '1'
+  (1).toString(); // '1'
 1..toString(); // '1'
 1 .toString(); // '1'
 ```
@@ -234,12 +235,12 @@ ES7에서 도입된 지수 연산자(`**`)는 좌항의 피연산자를 밑으�
 ```jsx
 // 
 if (result.data && result.data.user && result.data.user.auth > 3) {
-	...
+...
 }
 
 //
 if (result.data?.user?.auth > 3) {
-	...
+...
 }
 ```
 
@@ -313,8 +314,8 @@ printMessage(printMessage4, 'logical or');
 
 ```jsx
 const coffee = {
-	acidity: 'high',
-	body: 'havy'
+  acidity: 'high',
+  body: 'havy'
 }
 
 coffee.acidity ??= 'low';
@@ -340,12 +341,12 @@ console.log(obj); // {}
 
 ```jsx
 function Person(name, age) {
-	this.name = name;
-	this.age = age;
+  this.name = name;
+  this.age = age;
 
-	this.introduce = function () {
-		return `name: ${name} / age: ${age}`;
-	}
+  this.introduce = function () {
+    return `name: ${name} / age: ${age}`;
+  }
 }
 
 console.log(new Person(raehan, 30).introduce); // name: raehan / age: 30
@@ -361,7 +362,7 @@ console.log(new Person(raehan, 30).introduce); // name: raehan / age: 30
 
 ```jsx
 const obj = {
-	key: 'value';
+  key: 'value';
 }
 key in obj // true
 keys in obj //false
