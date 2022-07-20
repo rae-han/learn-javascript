@@ -152,7 +152,7 @@ instance.log(); // normal { log: [Function (anonymous)] }
 
 즉 모든 함수 객체는 callable이고, constructor이거나 non-constructor이다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5a7e3006-d771-4ab5-8706-3d25d8f2804d/Untitled.png)
+![Untitled](https://github.com/rae-han/learn-javascript/blob/master/deepdive/2nd/17/img.png)
 
 ## 17.2.5. constructor와 non-contructor의 구분
 
