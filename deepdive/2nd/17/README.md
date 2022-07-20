@@ -144,13 +144,13 @@ instance.log(); // normal { log: [Function (anonymous)] }
 
 함수가 일반 함수로서 호출되면 함수 객체의 내부 메서드 `[[Call]]`이 호출되고 `new` 연산자와 함께 생성자 함수로서 호출되면 내부 메서드 `[[Construct]]`가 호출된다.
 
-내부 메서드 [[Call]]을 갖는 함수 객체를 callable이라 하며, 내부 메서드 [[Construct]]를 갖는 함수 객체를 constructor, 갖지 않는 함수 객체를 non-constructor라고 부른다. callable은 호출할 수 있는 객체인 함수를 말하며, constructor는 생성자 함수로서 호출할 수 있는 함수, non-constructor는 객체를 생성자 함수로서 호출할 수 없는 함수를 의미한다.
+내부 메서드 `[[Call]]`을 갖는 함수 객체를 callable이라 하며, 내부 메서드 `[[Construct]]`를 갖는 함수 객체를 `constructor`, 갖지 않는 함수 객체를 `non-constructor`라고 부른다. `callable`은 호출할 수 있는 객체인 함수를 말하며, `constructor`는 생성자 함수로서 호출할 수 있는 함수, `non-constructor`는 객체를 생성자 함수로서 호출할 수 없는 함수를 의미한다.
 
-호출할 수 없는 객체는 함수 객체가 아니므로, 함수 객체는 callable이어야 한다. 따라서 모든 함수 객체는 내부 메서드 [[Call]]을 갖고 있으므로 호출할 수 있다.
+호출할 수 없는 객체는 함수 객체가 아니므로, 함수 객체는 `callable`이어야 한다. 따라서 모든 함수 객체는 내부 메서드 `[[Call]]`을 갖고 있으므로 호출할 수 있다.
 
-하지만 모든 함수 객체가 [[Construct]]를 갖는 것은 아니고 constructor일수도 non-constructor일수도 있다.
+하지만 모든 함수 객체가 `[[Construct]]`를 갖는 것은 아니고 `constructor`일수도 `non-constructor`일수도 있다.
 
-즉 모든 함수 객체는 callable이고, constructor이거나 non-constructor이다.
+즉 모든 함수 객체는 `callable`이고, `constructor`이거나 `non-constructor`이다.
 
 ![Untitled](https://github.com/rae-han/learn-javascript/blob/master/deepdive/2nd/17/img.png)
 
@@ -158,26 +158,26 @@ instance.log(); // normal { log: [Function (anonymous)] }
 
 자바스크립트 엔진은 함수 정의를 평가하여 함수 객체를 생성할 때 함수 정의 방식에 따라 구분한다.
 
-- constructor: 함수 선언문, 함수 표현식, 클래스(클래식도 함수다.)
-- non-constructor: 메서드(ES6 메서드 축약 표현), 화살표 함수
+- `constructor`: 함수 선언문, 함수 표현식, 클래스(클래식도 함수다.)
+- `non-constructor`: 메서드(ES6 메서드 축약 표현), 화살표 함수
 
-생성자 함수로서 호출될 것을 기대하지 않고 정의한 일반 함수 또한 new 연산자를 붙여 호출하면 생성자 함수처럼 동작할 수 있으므로 주의해야 한다.
+생성자 함수로서 호출될 것을 기대하지 않고 정의한 일반 함수 또한 `new` 연산자를 붙여 호출하면 생성자 함수처럼 동작할 수 있으므로 주의해야 한다.
 
 ## 17.2.6. new 연산자
 
-일반 함수와 생성자 함수에 특별한 형식적 차이는 없다. new 연산자와 함께 함수를 호출하면 해당 함수는 생성자 함수로 동작한다. 즉 new 연산자의 유무에 따라 [[Construct]] 내부 메서드가 호출될지 [[Call]] 내부 메서드가 호출될지 결정된다. 단 new 연산자와 함께 호출하는 함수는 constructor여야 한다.
+일반 함수와 생성자 함수에 특별한 형식적 차이는 없다. new 연산자와 함께 함수를 호출하면 해당 함수는 생성자 함수로 동작한다. 즉 `new` 연산자의 유무에 따라 `[[Construct]]` 내부 메서드가 호출될지 `[[Call]]` 내부 메서드가 호출될지 결정된다. 단 `new` 연산자와 함께 호출하는 함수는 `constructor`여야 한다.
 
 일반 함수와 생성자 함수에 특별한 형식적 차이가 없으므로 생성자 함수는 일반적으로 첫 문자를 대문자로 기술하는 파스칼 케이스로 명명하여 일반 함수와 구별하도록 한다.
 
 ## 17.2.7. new.target
 
-생성자 함수를 구분하기 위해 파스칼 케이스 컨벤션을 사용한다 하더라도 실수는 언제나 발생할 수 있다. 이런 위험성을 회피하기 위해 ES6(ES2015)부터 new.target을 지원한다.
+생성자 함수를 구분하기 위해 파스칼 케이스 컨벤션을 사용한다 하더라도 실수는 언제나 발생할 수 있다. 이런 위험성을 회피하기 위해 ES6(ES2015)부터 `new.target`을 지원한다.
 
-new.target은 this와 유사하게 constructor인 모든 함수 내부에서 암묵적인 지역 변수와 같이 사용되며 메타 프로퍼티라고 부른다.
+`new.target`은 `this`와 유사하게 `constructor`인 모든 함수 내부에서 암묵적인 지역 변수와 같이 사용되며 메타 프로퍼티라고 부른다.
 
-함수 내부에서 new.target을 사용하면 new 연산자와 함께 생성자 함수로서 호출되었는지 확인할 수 있다. new 연산자와 함께 생성자 함수로서 호출되면 함수 내부의 new.target은 함수 자신을 가리키고, new 연산자 없이 일반 함수로서 호출된 함수 내부의 new.target은 undefined다.
+함수 내부에서 `new.target`을 사용하면 `new` 연산자와 함께 생성자 함수로서 호출되었는지 확인할 수 있다. `new` 연산자와 함께 생성자 함수로서 호출되면 함수 내부의 `new.target`은 함수 자신을 가리키고, `new` 연산자 없이 일반 함수로서 호출된 함수 내부의 `new.target`은 `undefined`다.
 
-따라서 함수 내부에서 new.target을 사용하여 new 연산자와 생성자 함수로서 호출됐는지 확인하여, 그렇지 않은 경우 new 연산자와 함께 재귀 호출을 통해 생성자 함수로서 호출할 수 있다.
+따라서 함수 내부에서 `new.target`을 사용하여 `new` 연산자와 생성자 함수로서 호출됐는지 확인하여, 그렇지 않은 경우 `new` 연산자와 함께 재귀 호출을 통해 생성자 함수로서 호출할 수 있다.
 
 ```jsx
 function Circle(radius) {
@@ -219,8 +219,8 @@ console.log(circle.getDiameter()); // 10
 
 </aside>
 
-대부분의 빌트인 생성자 함수는 new 연산자와 함께 호출되었는지를 확인한 후 적절한 값을 반환한다.
+대부분의 빌트인 생성자 함수는 `new` 연산자와 함께 호출되었는지를 확인한 후 적절한 값을 반환한다.
 
-예를 들면 Object, Function 생성자 함수는 new 연산자 없이 호출해도 new 연산자와 함께 호출했을 때와 동일하게 동작한다.
+예를 들면 `Object`, `Function` 생성자 함수는 `new` 연산자 없이 호출해도 `new` 연산자와 함께 호출했을 때와 동일하게 동작한다.
 
-하지만 String, Number, Boolean 생성자 함수는 new 연산자와 함께 호출했을 때 각각의 객체를 생성하여 반환하지만, new 연산자 없이 호출하면 각각의 값을 반환한다. 이를 통해 데이터 타입을 변환하기도 한다.
+하지만 `String`, `Number`, `Boolean` 생성자 함수는 `new` 연산자와 함께 호출했을 때 각각의 객체를 생성하여 반환하지만, `new` 연산자 없이 호출하면 각각의 값을 반환한다. 이를 통해 데이터 타입을 변환하기도 한다.
