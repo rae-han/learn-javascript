@@ -37,5 +37,6 @@ console.log(Object.getOwnPropertyDescriptor(Object.prototype, '__proto__'));
 //     configurable: true
 // }
 
-console.log(square.__proto__ === Function.prototype)
-console.log(square.prototype.__proto__ === Object.prototype)
+console.log(square.__proto__ === Function.prototype);
+console.log(square.prototype.__proto__ === Object.prototype);
+console.log(Function.prototype.__proto__ === Object.prototype);
