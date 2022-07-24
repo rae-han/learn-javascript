@@ -15,26 +15,33 @@ const map = (f, iter) => {
     res.push(f(a));
   }
   return res;
+  // 함수형 프로그래밍은 외부에 직접적인 변화를 일으키거나 다른 함수를 호출하는 것이 아니라,
+  // 인자와 리턴 값을 통해 소통한다.
+  // iter 뜻은 맵 함수의 보조 함수가 이터러블을 따른다 라는 의미
+  // 기존에는 어떤 값을 수집할 것인지 명시적으로 적었다면 함수형 프로그래밍에서는 추상화를 통해, f라는 함수에게 완전히 위임한다.
 };
 
-// // let names = [];
-// // for (const p of products) {
-// //   names.push(p.name);
-// // }
-// // log(names);
-//
-// log(map(p => p.name, products));
-//
-// // let prices = [];
-// // for (const p of products) {
-// //   prices.push(p.price);
-// // }
-// // log(prices);
-//
-// log(map(p => p.price, products));
-//
-//
-//
+// let names = [];
+// for (const p of products) {
+//   names.push(p.name);
+// }
+// log(names);
+
+log(map(p => p.name, products));
+
+// let prices = [];
+// for (const p of products) {
+//   prices.push(p.price);
+// }
+// log(prices);
+
+log(map(p => p.price, products));
+
+// 함수형 프로그래밍에서는 map 이라는 함수에 보조함수를 통해서, 이터러블 규약을 따르는 어떤 값의 특정 값을 수집하겠다고 전달하는 식으로 사용한다.
+// 추가로 맵 함수는 고차함수이기도 하다. 함수를 값으로 다루면서 내가 원하는 시점에 인자를 적용한다.
+
+
+
 // // # 이터러블 프로토콜을 따른 map의 다형성
 //
 //
