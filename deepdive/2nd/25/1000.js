@@ -72,8 +72,11 @@ console.log(MyClass.sayHi()); // HI2!
 console.log(instance.privateAccessor());
 
 console.log(MyClass.staticPublicMethod1());
-
 console.log(MyClass.staticPublicMethod2());
+// this는 예상치 못한 동작을 발생시킬 수 있다.(javascript에서 this binding rule이 적용된다.)
+// 주로 상속했을때 문제가 발생한다.
+
+
 
 
 
