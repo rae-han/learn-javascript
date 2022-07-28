@@ -25,7 +25,27 @@ const MyClass = class NamedClass {
   static sayHi() {
     return 'HI2!'
   }
+
+  #privateMethod() {
+    return 'private method';
+  }
+
+  get privateAccessor() {
+    return this.#privateMethod;
+  }
+
+  static #staticPrivateMethod() {
+    return 'static private method';
+  }
+
+  static staticPublicMethod1() {
+    return NamedClass.#staticPrivateMethod();
+  }
+  static staticPublicMethod2 () {
+    return this.#staticPrivateMethod();
+  }
 }
+
 
 const instance = new MyClass(2);
 
@@ -45,10 +65,15 @@ console.log(instance.getC); // 8
 console.log(MyClass.getE1); // undefined
 console.log(MyClass.getE2); // 6
 
-
 console.log(instance.sayHi()); // Hi!
 console.log(MyClass.sayHi()); // HI2!
 
+// console.log(instance.#privateMethod());
+console.log(instance.privateAccessor());
+
+console.log(MyClass.staticPublicMethod1());
+
+console.log(MyClass.staticPublicMethod2());
 
 
 
