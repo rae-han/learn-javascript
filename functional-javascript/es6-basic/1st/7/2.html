@@ -1,2 +1,26 @@
 <script src="../fx.js"></script>
 
+<script>
+  // const map = curry((f, iter) => {
+  //   let res = [];
+  //   for (const a of iter) {
+  //     res.push(f(a));
+  //   }
+  //   return res;
+  // })
+
+  // 위 코드를 풀어 쓰면
+
+  const map = curry((f, iter) => {
+    // 1. 여기서부터
+    let res = [];
+    iter = iter[Symbol.iterator]();;
+    let cur;
+    while (!(cur = iter.next()).done) {
+      const a = cur.value;
+      // 1. 여기 까지가 for (const a of iter) 가 해주는 일
+      res.push(f(a));
+    }
+    return res;
+  })
+</script>
