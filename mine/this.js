@@ -96,3 +96,10 @@ const constructorFunc = function (color = 'black') {
 const instance = new constructorFunc();
 instance.sayHi();
 instance.sayBye();
+
+var foo = {n: 1};
+var bar = foo;
+foo.x = foo = {n: 2};
+console.log(foo)
+console.log(foo.x)
+console.log(bar)
