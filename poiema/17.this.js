@@ -18,3 +18,28 @@ let that = { test: 'this' };
 dir.call(that); // that
 dir.apply(that); // that
 dir.bind(that)(); // that
+
+let a = 100;
+
+function outer() {
+  let a = 1;
+  console.log(1, this);
+
+  function inner1() {
+    console.log(2, this)
+  }
+
+  const inner2 = function() {
+    console.log(3, this)
+  }
+
+  const inner3 = () => {
+    console.log(4, this)
+  }
+
+  inner1();
+  inner2();
+  inner3();
+}
+
+outer();
